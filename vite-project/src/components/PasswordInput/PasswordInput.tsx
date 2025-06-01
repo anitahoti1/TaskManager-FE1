@@ -1,4 +1,5 @@
 import { Line } from 'rc-progress';
+import './PasswordInput.css';
 
 interface IPasswordInput {
     password : string;
@@ -21,8 +22,9 @@ const PasswordInput = ({password,handleChange,passwordStrength,color}:IPasswordI
       value={password}
       onChange={(e) =>handleChange(e)}
     />
- {password.length > 0 &&   <div style={{display:"flex",flexDirection:'column'}}>
-  <span style={{fontSize:"13px", color: password.length >= 6 ? "green" : 'red'}}>{password.length >= 6 && (password) ? "✔" : ' ✖'} Password must be at least 6 characters </span>
+ {password.length > 0 &&   
+ <div className='error-lines'>
+<span style={{fontSize:"13px", color: password.length >= 6 ? "green" : 'red'}}>{password.length >= 6 && (password) ? "✔" : ' ✖'} Password must be at least 6 characters </span>Add commentMore actions
   <span style={{fontSize:"13px", color: /[a-z]/.test(password) ? "green" : 'red'}}>{/[a-z]/.test(password) ? "✔" : ' ✖'} Password must have at least 1 lowercase letter </span>
   <span style={{fontSize:"13px", color: /[A-Z]/.test(password) ? "green" : 'red'}}>{/[A-Z]/.test(password) ? "✔" : ' ✖'} Password must have at least 1 uppercase letter </span>
   <span style={{fontSize:"13px", color: /\d/.test(password) ? "green" : 'red'}}>{/\d/.test(password) ? "✔" : ' ✖'} Password must have at least 1 number </span>
@@ -31,7 +33,7 @@ const PasswordInput = ({password,handleChange,passwordStrength,color}:IPasswordI
   </div>}
    
 
-    <div style={{ maxWidth:'43%' , maxHeight:'15px'}}>
+    <div  className='password-error' >
       <Line 
         percent={passwordStrength} 
         strokeWidth={4} 

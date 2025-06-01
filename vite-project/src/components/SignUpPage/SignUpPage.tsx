@@ -118,7 +118,6 @@ const SignUpPage = () => {
     });
 
     // proceed with submission (e.g., API call)
-    console.log('Form submitted:', user);
   };
 
   const handleChange = (
@@ -135,13 +134,7 @@ const SignUpPage = () => {
     <div className="signup-form">
       <div className="signup-left-container">
         <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-          }}
-        >
+          className="form-content">
           <form className="signup-form-content" onSubmit={handleSubmit}>
             <h2>Sign Up</h2>
             <p>Fill the form below to create your account</p>
