@@ -1,4 +1,5 @@
 import React from 'react';
+import SignUpPage from '../components/SignUpPage/SignUpPage.css';
 
 interface IDefaultInput {
   type: string;
@@ -24,7 +25,7 @@ const DefaultInput: React.FC<IDefaultInput> = ({
   style,
 }) => {
   return (
-    <div style={{ marginBottom: '10px', position: 'relative' }}>
+    <div className='default-input' >
       {label && <label htmlFor={name}>{label}</label>}
       <input
         type={type}
@@ -36,7 +37,7 @@ const DefaultInput: React.FC<IDefaultInput> = ({
         style={style}
       />
       {error && (
-        <span className="error-text" style={{ position: 'absolute', bottom: '-15px' }}>
+        <span className="error-text-default-input">
           {error}
         </span>
       )}

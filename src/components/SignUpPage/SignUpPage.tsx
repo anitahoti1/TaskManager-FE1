@@ -70,18 +70,17 @@ const SignUpPage = () => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
     if (user.firstName.length < 3 || user.firstName.length > 20) {
-      errors.firstName = 'First name must be 3-20 characters';
+    
       hasError = true;
     }
 
       if (user.lastName.length < 3 || user.lastName.length > 20) {
-      errors.lastName = 'Last name must be 3-20 characters';
       hasError = true;
     }
 
      if (!emailRegex.test(user.email)) {
-      errors.email = 'Email is invalid';
-      hasError = true;
+      errors.email = 'Email is required';
+       hasError = true;
     }
 
      if (!passwordRegex.test(user.password)) {
