@@ -7,9 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-   "preview": "vite preview"
+    "preview": "vite preview"
   },
-   "dependencies": {
+  "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.1",
@@ -18,7 +18,7 @@
     "formik": "^2.4.6",
     "rc-progress": "^4.0.0",
     "react": "^19.0.0",
-    "react-datepicker": "^8.3.0",
+    "react-datepicker": "^8.4.0",
     "react-dom": "^19.0.0",
     "react-modal": "^3.16.3",
     "react-router": "^7.5.0",
