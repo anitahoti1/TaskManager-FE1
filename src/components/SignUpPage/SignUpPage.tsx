@@ -188,7 +188,7 @@ const handleChange = (field: keyof IUser, value: string | Date  | null ) => {
             showMonthDropdown
             dropdownMode='select'
           />
-          <span className="error-text" style={{display: formErrors.birthday ? "block" : "none", position: 'absolute', bottom:"-15px" }}>{formErrors.birthday}</span>
+           <span className="error-text">{formErrors.birthday}</span>
 
           <button type="submit" className="submit-btn">Sign Up</button>
           <p>Already have an account? <a href="/signin">Sign in</a></p>
