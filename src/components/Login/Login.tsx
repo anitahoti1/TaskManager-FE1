@@ -1,7 +1,7 @@
 import './Login.css'
 //import { Button } from "@mui/material"
 import { ChangeEvent, FormEvent, useState } from "react"
-import Logo from './../../assets/logo.png'
+import Logo from './../../logo/logo.png'
 // import Visibility from '@mui/icons-material/Visibility';
 // import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Input } from '../CustomInput/CustomInput';
