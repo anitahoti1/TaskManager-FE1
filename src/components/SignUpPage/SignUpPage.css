@@ -174,25 +174,3 @@
   width: 70%;
 }
  
-.error-text {
-  color: red;
-  font-size: 13px;
-  margin-bottom: 10px;
-  display: block;
-}
-a{
-  text-decoration: underline;
-  color: blue;
-}
-
-.default-input{
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.error-text-default-input{
-  color: red;
-  font-size: 13px;
-  margin-bottom: 10px;
-  display: block;
-}

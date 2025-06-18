@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import './SignUpPage.css';
 import logo from '../../logo/logo.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PasswordInput from '../PasswordInput/PasswordInput';
 import DefaultInput from '../../DefaultInput/DefaultInput';
+import { useNavigate } from 'react-router';
 
 interface IUser {
   firstName: string,
@@ -26,6 +28,8 @@ const SignUpPage = () => {
     birthday: null
   });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const strength = (() => {
       let score = 0;
@@ -37,14 +41,14 @@ const SignUpPage = () => {
       if (/[@$!%*?&]/.test(pw)) score += 20;
       return score;
     })();
-  
+
     setPasswordStrength(strength);
-  
-    if (strength < 40) setColor("red"); 
-    else if (strength < 80) setColor('orange'); 
-    else setColor('green'); 
+
+    if (strength < 40) setColor("red");
+    else if (strength < 80) setColor('orange');
+    else setColor('green');
   }, [user.password]);
-  
+
   const [formErrors, setFormErrors] = useState({
     firstName: '',
     lastName: '',
@@ -72,22 +76,22 @@ const SignUpPage = () => {
       hasError = true;
     }
 
-      if (user.lastName.length < 3 || user.lastName.length > 20) {
+    if (user.lastName.length < 3 || user.lastName.length > 20) {
       hasError = true;
     }
 
-     if (!emailRegex.test(user.email)) {
+    if (!emailRegex.test(user.email)) {
       errors.email = 'Email is required';
       hasError = true;
     }
 
-     if (!passwordRegex.test(user.password)) {
+    if (!passwordRegex.test(user.password)) {
       errors.password = 'Password must be at least 6 characters.';
       hasError = true;
     }
 
 
-     if (user.confirmPassword !== user.password) {
+    if (user.confirmPassword !== user.password) {
       errors.confirmPassword = 'Passwords do not match';
       hasError = true;
     }
@@ -114,16 +118,16 @@ const SignUpPage = () => {
 
     setFormErrors({
       firstName: '',
-      lastName: '', 
-      email: '', 
-      password: '', 
-      confirmPassword: '', 
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
       birthday: ''
     });
   };
 
 
-  const handleChange = (field: keyof IUser, value: string | Date  | null ) => {
+  const handleChange = (field: keyof IUser, value: string | Date | null) => {
     setUser((prev) => ({
       ...prev,
       [field]: value
@@ -134,69 +138,72 @@ const SignUpPage = () => {
     <div className='signup-form'>
       <div className="signup-left-container">
         <div className="form-content">
-        <form className="signup-form-content" onSubmit={handleSubmit}>
-          <h2>Sign Up</h2>
-          <p>Fill the form below to create your account</p>
+          <form className="signup-form-content" onSubmit={handleSubmit}>
+            <h2>Sign Up</h2>
+            <p>Fill the form below to create your account</p>
 
-           <DefaultInput 
-             type="text"
-             value={user.firstName}
-             onChange={(e) => handleChange('firstName' , e.target.value)}
-             placeholder="First name"
-           />
+            <DefaultInput
+              type="text"
+              value={user.firstName}
+              onChange={(e) => handleChange('firstName', e.target.value)}
+              placeholder="First name"
+            />
 
-          <DefaultInput 
-             type="text"
-             value={user.lastName}
-             onChange={(e) => handleChange('lastName' , e.target.value)}
-             placeholder="Last Name"
-           />
+            <DefaultInput
+              type="text"
+              value={user.lastName}
+              onChange={(e) => handleChange('lastName', e.target.value)}
+              placeholder="Last Name"
+            />
 
-          <DefaultInput 
-             type="email"
-             value={user.email}
-             onChange={(e) => handleChange('email' , e.target.value)}
-             placeholder="Email"
-             error={formErrors.email}
-           />
+            <DefaultInput
+              type="email"
+              value={user.email}
+              onChange={(e) => handleChange('email', e.target.value)}
+              placeholder="Email"
+              error={formErrors.email}
+            />
 
-          <PasswordInput  password={user.password}
-           handleChange={(e) => handleChange('password', e.target.value)}
-           passwordStrength={passwordStrength}
-           color={color}
-           />
-         
-         <DefaultInput 
-             type="text"
-             value={user.confirmPassword}
-             onChange={(e) => handleChange('confirmPassword', e.target.value)}
-             placeholder="Confirm Password"
-             error={formErrors.confirmPassword}
-           />
-    
-          <DatePicker
-            selected={user.birthday}
-            onChange={(date) => handleChange('birthday', date)}
-            placeholderText="Enter your birthday"
-            dateFormat="dd/MM/yyyy"
-            className="date-picker-input"
-            maxDate={new Date(new Date().setFullYear(new Date().getFullYear()-18))}
-            showYearDropdown
-            showMonthDropdown
-            dropdownMode='select'
-          />
-          <span className="error-text">{formErrors.birthday}</span>
+            <PasswordInput password={user.password}
+              handleChange={(e) => handleChange('password', e.target.value)}
+              passwordStrength={passwordStrength}
+              color={color}
+            />
 
-          <button type="submit" className="submit-btn">Sign Up</button>
-          <p>Already have an account? <a href="/signin">Sign in</a></p>
-        </form>
+            <DefaultInput
+              type="text"
+              value={user.confirmPassword}
+              onChange={(e) => handleChange('confirmPassword', e.target.value)}
+              placeholder="Confirm Password"
+              error={formErrors.confirmPassword}
+            />
+
+            <DatePicker
+              selected={user.birthday}
+              onChange={(date) => handleChange('birthday', date)}
+              placeholderText="Enter your birthday"
+              dateFormat="dd/MM/yyyy"
+              className="date-picker-input"
+              maxDate={new Date(new Date().setFullYear(new Date().getFullYear() - 18))}
+              showYearDropdown
+              showMonthDropdown
+              dropdownMode='select'
+            />
+            <span className="error-text">{formErrors.birthday}</span>
+
+            <button type="submit" className="submit-btn">Sign Up</button>
+            <p>Already have an account? <a href="/login" onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+              e.preventDefault();
+              navigate('/login')
+            }}>Sign in</a></p>
+          </form>
         </div>
-    
-    </div>
-    <div className="signup-right-container">
+
+      </div>
+      <div className="signup-right-container">
         <img src={logo} alt="Logo" className="logo-img" />
       </div>
-  </div>
+    </div>
   );
 };
 

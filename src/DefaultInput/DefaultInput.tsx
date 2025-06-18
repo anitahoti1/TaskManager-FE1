@@ -1,8 +1,9 @@
+
 import React from 'react';
-import SignUpPage from '../components/SignUpPage/SignUpPage.css';
+import './index.css'
 
 interface IDefaultInput {
-  type: string;
+  type: React.HTMLInputTypeAttribute;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
