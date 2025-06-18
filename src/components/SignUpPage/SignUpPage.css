@@ -39,7 +39,7 @@
  .signup-left-container,
 .signup-right-container {
   flex: 1;
-
+ 
 }
 
 .form-content{
@@ -50,11 +50,10 @@
 }
  
  .signup-left-container h2 {
-
-a{
-  text-decoration: underline;
-  color: blue;
-}
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
  }
  .signup-left-container p {
   margin-bottom: 20px;
@@ -185,6 +184,7 @@ a{
   text-decoration: underline;
   color: blue;
 }
+
 .default-input{
   margin-bottom: 10px;
   position: relative;

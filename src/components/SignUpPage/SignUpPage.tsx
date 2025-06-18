@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './SignUpPage.css';
 import logo from '../../logo/logo.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -70,7 +69,6 @@ const SignUpPage = () => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
     if (user.firstName.length < 3 || user.firstName.length > 20) {
-    
       hasError = true;
     }
 
@@ -80,7 +78,7 @@ const SignUpPage = () => {
 
      if (!emailRegex.test(user.email)) {
       errors.email = 'Email is required';
-       hasError = true;
+      hasError = true;
     }
 
      if (!passwordRegex.test(user.password)) {
@@ -125,7 +123,7 @@ const SignUpPage = () => {
   };
 
 
-const handleChange = (field: keyof IUser, value: string | Date  | null ) => {
+  const handleChange = (field: keyof IUser, value: string | Date  | null ) => {
     setUser((prev) => ({
       ...prev,
       [field]: value
@@ -135,7 +133,7 @@ const handleChange = (field: keyof IUser, value: string | Date  | null ) => {
   return (
     <div className='signup-form'>
       <div className="signup-left-container">
-        <div  className="form-content">
+        <div className="form-content">
         <form className="signup-form-content" onSubmit={handleSubmit}>
           <h2>Sign Up</h2>
           <p>Fill the form below to create your account</p>
@@ -187,7 +185,7 @@ const handleChange = (field: keyof IUser, value: string | Date  | null ) => {
             showMonthDropdown
             dropdownMode='select'
           />
-           <span className="error-text">{formErrors.birthday}</span>
+          <span className="error-text">{formErrors.birthday}</span>
 
           <button type="submit" className="submit-btn">Sign Up</button>
           <p>Already have an account? <a href="/signin">Sign in</a></p>
