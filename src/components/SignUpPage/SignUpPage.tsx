@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './SignUpPage.css';
-import logo from '../../logo/logo.png';
+import logo from '../../assets/logo.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PasswordInput from '../PasswordInput/PasswordInput';
