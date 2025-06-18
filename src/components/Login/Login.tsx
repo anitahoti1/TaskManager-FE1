@@ -1,7 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import Logo from './../../assets/logo.png'
-
-
 import { Input } from '../CustomInput/CustomInput';
 import './Login.css'
 import DefaultInput from "../../DefaultInput/DefaultInput";
@@ -50,68 +48,6 @@ const Login = () => {
         setIsPasswordVisible(!isPasswordVisible);
     };
 
-    // return (
-    //     <div className="login">
-    //         <div className="form-container">
-    //             <form noValidate onSubmit={handleSubmit}>
-    //                 <h1 className='form-title'>Login</h1>
-    //                 <DefaultInput onChange={handleChange} type="email" value={email} placeholder={"Enter Email"} error={hasError ? "Email is not valid" : undefined} />
-    //                 <Input
-    //                     type='password'
-    //                     label={{
-    //                         htmlFor: "password",
-    //                         name: "Password"
-    //                     }}
-    //                     placeholder='Enter Password'
-    //                     handleChange={handlePasswordChange}
-    //                     errors={{
-    //                         visible: hasPasswordError,
-    //                         message: "Email or Password is not valid"
-    //                     }}
-    //                 />
-    //                 {/* <div className='input-wrapper'>
-    //                     <label htmlFor="password">Password</label>
-    //                     <div className="password-input-container">
-    //                         <input
-    //                             type={isPasswordVisible ? 'text' : 'password'}
-    //                             name="password"
-    //                             id="password"
-    //                             onChange={handlePasswordChange}
-    //                             value={password}
-    //                             placeholder="Enter Password"
-    //                             className="form-control password-input"
-    //                             autoComplete='off'
-    //                             data-lpignore="true"
-    //                         />
-
-    //                         <div
-    //                             className="password-toggle-button"
-    //                             onClick={togglePasswordVisibility}
-    //                         >
-    //                             {isPasswordVisible ? <VisibilityOff /> : <Visibility />}
-    //                         </div>
-
-    //                         {/* <span style={{ color: 'red', position: 'absolute', bottom: '-8px', display: hasPasswordError ? 'block' : 'none' }}>
-    //                             Password is not valid
-    //                         </span> */}
-    //                 {/* </div> */}
-    //                 {/* </div>  */}
-
-    //                 <div className='button-wrapper'>
-    //                     <button className='submit-button'>Login</button>
-    //                     <p className="signup-text">Don't have an account? <a href="#" onClick={(e:any) => {
-    //                         e.preventDefault();
-    //                         navigate('/signup')
-    //                     }}>Sign Up now</a></p>
-    //                 </div>
-    //             </form>
-    //         </div>
-
-    //         <div className='logo-section'>
-    //             <img src={Logo} alt="logo" />
-    //         </div>
-    //     </div>
-    // )
 
     return (
         <div className='signup-form'>
@@ -124,39 +60,6 @@ const Login = () => {
                             position: 'relative',
                             maxWidth: '75%'
                         }}>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                             <DefaultInput onChange={handlePasswordChange} style={{
                                 maxWidth: '100%'
@@ -179,18 +82,6 @@ const Login = () => {
             </div >
             <div className="signup-right-container">
                 <img src={Logo} alt="Logo" className="logo-img" />
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
         </div >
     );
