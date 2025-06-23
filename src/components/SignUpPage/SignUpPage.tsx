@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './SignUpPage.css';
-import logo from '../../logo/logo.png';
+import logo from './../../logo/logo.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PasswordInput from '../PasswordInput/PasswordInput';
@@ -61,7 +61,7 @@ const SignUpPage = () => {
   });
     console.log("formErrors",formErrors)
   const validateInputs = (user: IUser): boolean => {
-   
+
     let errors = {
       firstName: '',
       lastName: '',
@@ -74,6 +74,7 @@ const SignUpPage = () => {
     let hasError = false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/;
+
 
     if (!emailRegex.test(user.email)) {
       errors.email = 'Email is not valid';
@@ -108,9 +109,9 @@ const SignUpPage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-   
+
     const isValid = validateInputs(user);
-  
+
     if (!isValid) {
     return
 
@@ -118,28 +119,28 @@ const SignUpPage = () => {
       setBackMessage(undefined);
     axios({
       method: 'post',
-      url: 'https://localhost:7095/api/Auth/register',
+      url: 'https://localhost:7187/api/Auth/register',
       data: {
         userName: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
         birthdate: user.birthday,
         password: user.password
-        
+
       }
     }).then(function (response) {
       if(response.data.status === false){
-    
-  
+
+
           setBackMessage(response.data.errors[0].message);
-        
+
       }else {
         toast.success('User registered,now you can login' , {
           position:'top-right',
           onClose: () => navigate('/'),
         })
       }
-        
+
     });
     setFormErrors({
       firstName: '',
@@ -162,7 +163,7 @@ const SignUpPage = () => {
 
   return (
     <div className='signup-form'>
-       
+
       <div className="signup-left-container">
         <div className="form-content">
           <form className="signup-form-content" onSubmit={handleSubmit}>
@@ -196,7 +197,7 @@ const SignUpPage = () => {
               placeholder="Email"
               error={backMessage ? backMessage : formErrors.email}
             />
-              
+
 
             <PasswordInput password={user.password}
               handleChange={(e) => handleChange('password', e.target.value)}
@@ -219,7 +220,7 @@ const SignUpPage = () => {
             <DatePicker
               selected={user.birthday}
               onChange={(date) => {handleChange('birthday', date)
-              
+
               }}
               placeholderText="Enter your birthday"
               dateFormat="dd/MM/yyyy"
@@ -230,13 +231,13 @@ const SignUpPage = () => {
               dropdownMode='select'
             />
             <span className="error-text">{formErrors.birthday}</span>
-         
+
               <ToastContainer />
             <button type="submit" className="submit-btn">Sign Up</button>
-            
+
             <p>Already have an account? <a href="/login" onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
               e.preventDefault();
-              navigate('/')
+              navigate('/login')
             }}>Sign in</a></p>
           </form>
         </div>
