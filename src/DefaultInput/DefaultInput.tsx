@@ -10,8 +10,10 @@ interface IDefaultInput {
   name?: string;
   label?: string;
   error?: string;
+  required?:boolean;
   className?: string;
   style?: React.CSSProperties;
+  autoComplete?:boolean;
 }
 
 const DefaultInput: React.FC<IDefaultInput> = ({
@@ -23,12 +25,14 @@ const DefaultInput: React.FC<IDefaultInput> = ({
   label,
   error,
   className,
+  required,
   style,
 }) => {
   return (
     <div className='default-input' >
       {label && <label htmlFor={name}>{label}</label>}
       <input
+        required={required}
         type={type}
         value={value}
         onChange={onChange}

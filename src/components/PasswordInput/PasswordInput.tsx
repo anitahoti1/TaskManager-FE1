@@ -6,7 +6,7 @@ interface IPasswordInput {
     handleChange(e:any): void;
     passwordStrength: number;
     color:string;
-  
+    autoComplete?:boolean;
 }
 
 

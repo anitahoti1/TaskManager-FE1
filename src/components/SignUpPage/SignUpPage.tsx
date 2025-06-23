@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './SignUpPage.css';
-import logo from '../../assets/logo.png';
+import logo from '../../logo/logo.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PasswordInput from '../PasswordInput/PasswordInput';
 import DefaultInput from '../../DefaultInput/DefaultInput';
 import { useNavigate } from 'react-router';
+import axios  from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 interface IUser {
   firstName: string,
@@ -48,7 +50,7 @@ const SignUpPage = () => {
     else if (strength < 80) setColor('orange');
     else setColor('green');
   }, [user.password]);
-
+  const [ backMessage,setBackMessage] = useState<string| undefined>(undefined);
   const [formErrors, setFormErrors] = useState({
     firstName: '',
     lastName: '',
@@ -57,8 +59,9 @@ const SignUpPage = () => {
     confirmPassword: '',
     birthday: ''
   });
-
+    console.log("formErrors",formErrors)
   const validateInputs = (user: IUser): boolean => {
+   
     let errors = {
       firstName: '',
       lastName: '',
@@ -70,18 +73,10 @@ const SignUpPage = () => {
 
     let hasError = false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-
-    if (user.firstName.length < 3 || user.firstName.length > 20) {
-      hasError = true;
-    }
-
-    if (user.lastName.length < 3 || user.lastName.length > 20) {
-      hasError = true;
-    }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/;
 
     if (!emailRegex.test(user.email)) {
-      errors.email = 'Email is required';
+      errors.email = 'Email is not valid';
       hasError = true;
     }
 
@@ -107,15 +102,45 @@ const SignUpPage = () => {
     };
 
     setFormErrors(errors);
+
     return !hasError;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+   
     const isValid = validateInputs(user);
-    if (!isValid) return;
+  
+    if (!isValid) {
+    return
 
+    }else {
+      setBackMessage(undefined);
+    axios({
+      method: 'post',
+      url: 'https://localhost:7095/api/Auth/register',
+      data: {
+        userName: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        birthdate: user.birthday,
+        password: user.password
+        
+      }
+    }).then(function (response) {
+      if(response.data.status === false){
+    
+  
+          setBackMessage(response.data.errors[0].message);
+        
+      }else {
+        toast.success('User registered,now you can login' , {
+          position:'top-right',
+          onClose: () => navigate('/'),
+        })
+      }
+        
+    });
     setFormErrors({
       firstName: '',
       lastName: '',
@@ -124,6 +149,7 @@ const SignUpPage = () => {
       confirmPassword: '',
       birthday: ''
     });
+  }
   };
 
 
@@ -136,6 +162,7 @@ const SignUpPage = () => {
 
   return (
     <div className='signup-form'>
+       
       <div className="signup-left-container">
         <div className="form-content">
           <form className="signup-form-content" onSubmit={handleSubmit}>
@@ -143,6 +170,8 @@ const SignUpPage = () => {
             <p>Fill the form below to create your account</p>
 
             <DefaultInput
+            required={true}
+            autoComplete={true}
               type="text"
               value={user.firstName}
               onChange={(e) => handleChange('firstName', e.target.value)}
@@ -150,6 +179,8 @@ const SignUpPage = () => {
             />
 
             <DefaultInput
+              required={true}
+              autoComplete={true}
               type="text"
               value={user.lastName}
               onChange={(e) => handleChange('lastName', e.target.value)}
@@ -157,30 +188,39 @@ const SignUpPage = () => {
             />
 
             <DefaultInput
-              type="email"
+              required={true}      
+              autoComplete={true}
+              type="text"
               value={user.email}
               onChange={(e) => handleChange('email', e.target.value)}
               placeholder="Email"
-              error={formErrors.email}
+              error={backMessage ? backMessage : formErrors.email}
             />
+              
 
             <PasswordInput password={user.password}
               handleChange={(e) => handleChange('password', e.target.value)}
               passwordStrength={passwordStrength}
               color={color}
+              autoComplete={true}
+
             />
 
             <DefaultInput
-              type="text"
+              required={true}
+              type="password"
               value={user.confirmPassword}
               onChange={(e) => handleChange('confirmPassword', e.target.value)}
               placeholder="Confirm Password"
+              autoComplete={false}
               error={formErrors.confirmPassword}
             />
 
             <DatePicker
               selected={user.birthday}
-              onChange={(date) => handleChange('birthday', date)}
+              onChange={(date) => {handleChange('birthday', date)
+              
+              }}
               placeholderText="Enter your birthday"
               dateFormat="dd/MM/yyyy"
               className="date-picker-input"
@@ -190,11 +230,13 @@ const SignUpPage = () => {
               dropdownMode='select'
             />
             <span className="error-text">{formErrors.birthday}</span>
-
+         
+              <ToastContainer />
             <button type="submit" className="submit-btn">Sign Up</button>
+            
             <p>Already have an account? <a href="/login" onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
               e.preventDefault();
-              navigate('/login')
+              navigate('/')
             }}>Sign in</a></p>
           </form>
         </div>
