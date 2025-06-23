@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './SignUpPage.css';
-import logo from './../../logo/logo.png';
+import logo from '../../logo/logo.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PasswordInput from '../PasswordInput/PasswordInput';
@@ -137,7 +137,7 @@ const SignUpPage = () => {
       }else {
         toast.success('User registered,now you can login' , {
           position:'top-right',
-          onClose: () => navigate('/'),
+          onClose: () => navigate('/login'),
         })
       }
 
