@@ -1,10 +1,15 @@
-import { ChangeEvent, FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useEffect, useState } from "react"
+
 import Logo from './../../assets/logo.png'
-import { Input } from '../CustomInput/CustomInput';
+
 import './Login.css'
 import DefaultInput from "../../DefaultInput/DefaultInput";
 import { useNavigate } from "react-router";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+
 
 const Login = () => {
     const [email, setEmail] = useState<string>('');
@@ -12,6 +17,33 @@ const Login = () => {
     const [hasPasswordError, setHasPasswordError] = useState<boolean>(false);
     const [password, setPassword] = useState<string>('');
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
+   
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('token');
+        if (accessToken) {
+            axios.get('http://localhost:5080/api/Auth/GetAuth',{
+                headers:{
+                'Authorization': `Bearer ${accessToken}`
+         } })
+                .then(function (response) {
+                
+                    console.log(response);
+                   
+            
+                })
+                .catch(function (error) {
+                    
+                    console.log(error);
+                })
+                .finally(function () {
+                   
+                });
+
+
+        }
+    }, [])
 
     const navigate = useNavigate();
 
@@ -42,11 +74,38 @@ const Login = () => {
         event.preventDefault();
         setHasError(!validateEmail(email));
         setHasPasswordError(!validatePassword(password));
+        axios.post('http://localhost:5080/api/Auth/login', {
+            userName: email,
+            password: password
+        })
+            .then((response) => {
+                if (hasError) {
+                    //console.log('Logging the error', error);
+                    toast.error("Email or Password is not valid!", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    })
+                }
+                const { token, firstName, lastName, birthdate } = response.data.data;
+                localStorage.setItem("token", token);
+                localStorage.setItem("user", JSON.stringify({ firstName, lastName, birthdate }));
+                navigate('/dashboard');
+
+            })
+
     }
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
     };
+
+
 
 
     return (
@@ -80,6 +139,7 @@ const Login = () => {
                 </div>
 
             </div >
+
             <div className="signup-right-container">
                 <img src={Logo} alt="Logo" className="logo-img" />
             </div>
