@@ -1,4 +1,3 @@
-
 import React from 'react';
 import './index.css'
 
@@ -10,10 +9,10 @@ interface IDefaultInput {
   name?: string;
   label?: string;
   error?: string;
-  required?:boolean;
+  required?: boolean;
   className?: string;
   style?: React.CSSProperties;
-  autoComplete?:boolean;
+  autoComplete?: boolean;
 }
 
 const DefaultInput: React.FC<IDefaultInput> = ({
@@ -27,12 +26,13 @@ const DefaultInput: React.FC<IDefaultInput> = ({
   className,
   required,
   style,
+  autoComplete,
 }) => {
   return (
     <div className='default-input' >
       {label && <label htmlFor={name}>{label}</label>}
       <input
-        required={required}
+       required={required}
         type={type}
         value={value}
         onChange={onChange}
@@ -40,6 +40,7 @@ const DefaultInput: React.FC<IDefaultInput> = ({
         name={name}
         className={className}
         style={style}
+        autoComplete={autoComplete ? 'on' : 'off'}
       />
       {error && (
         <span className="error-text-default-input">
