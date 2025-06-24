@@ -11,45 +11,6 @@ const TasksDashboard = () => {
 const [tasksFromBack, setTasksFromBack ] = useState<{toDo:Array<any>,inprogress:Array<any>,review:Array<any>,done:Array<any>,}>({toDo:[],inprogress:[],review:[],done:[]});
 const [tasks, setTasks] = useState<Array<ITask>>([
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ]);
 
 
@@ -65,7 +26,7 @@ useEffect(()=>{
               },{ headers: {"Authorization" : `Bearer ${token}`} }).then((res)=>{
 
                 setTasksFromBack(res.data.data);
-
+              
             })
 },[])
 
@@ -110,6 +71,16 @@ setTaskBeingEdited(null);
 }}
 onCancel={() => setTaskBeingEdited(null)}
 />
+
+
+
+
+
+
+
+
+
+
 )}
 
 
@@ -117,4 +88,4 @@ onCancel={() => setTaskBeingEdited(null)}
 )
 }
 
-export default TasksDashboard;
+export default TasksDashboard

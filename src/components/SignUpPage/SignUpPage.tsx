@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import PasswordInput from '../PasswordInput/PasswordInput';
 import DefaultInput from '../../DefaultInput/DefaultInput';
 import { useNavigate } from 'react-router';
-import axios  from 'axios';
+import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
 interface IUser {
@@ -119,7 +119,7 @@ const SignUpPage = () => {
       setBackMessage(undefined);
       axios({
         method: 'post',
-        url: 'https://localhost:7095/api/Auth/register',
+        url: 'https://localhost:7187/api/Auth/register',
         data: {
           userName: user.email,
           firstName: user.firstName,

@@ -22,7 +22,7 @@ const TasksContainer = ({name,tasks,backgroundColor,borderColor,onDelete,onEdit}
         ))}
         </div>
 
-
+      
     </div>
   )
 }

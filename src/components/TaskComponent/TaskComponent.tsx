@@ -13,7 +13,7 @@ const TaskComponent = ({task,onDelete,onEdit}:ITaskComponent) => {
   const handleEdit = () => {
     onEdit(task.id);
     }
-
+    
     const handleDelete = () => {
       onDelete(task.id)
     }
@@ -28,7 +28,7 @@ const TaskComponent = ({task,onDelete,onEdit}:ITaskComponent) => {
         <div>
             {task.title}
         </div>
-
+      
     </div>
   )
 }

@@ -1,4 +1,3 @@
-
 body{
     background-color: white;
 }
@@ -44,7 +43,7 @@ h2{
     height:calc(100% - 60px);
     justify-content: center;
     gap:20px;
-   
+
 
 }
 
@@ -77,25 +76,5 @@ h2{
     h2 {
         margin-top: 28px; 
     }
-}
 
-@media (max-width: 768px) {
-    .tasks-list {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .task-btn {
-      width: 100%;
-    }
-  
-    .tasks-container {
-      max-width: 100%;
-      width: 100%;
-    }
-  
-    .top-section {
-      flex-direction: column;
-      gap: 10px;
-    }
-  }
+}
