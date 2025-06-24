@@ -26,7 +26,7 @@ const TaskComponent = ({task,onDelete,onEdit}:ITaskComponent) => {
     <div onClick={handleDelete}>🗑️</div> 
         </div>
         <div>
-            {task.description}
+            {task.title}
         </div>
 
     </div>
