@@ -1,6 +1,6 @@
 import { ITask } from '../../types/ITask/ITask';
 import TaskComponent from '../TaskComponent/TaskComponent';
-import './TaskContainer.css'
+import './TasksContainer.css'
 
 interface ITasksContainer {
     name: string;
