@@ -4,16 +4,18 @@ import './TaskComponent.css';
 
 interface ITaskComponent {
     task:ITask;
+    onDelete:(id:number) => void;
+    onEdit:(id:number) => void;
 }
 
-const TaskComponent = ({task}:ITaskComponent) => {
+const TaskComponent = ({task,onDelete,onEdit}:ITaskComponent) => {
 
   const handleEdit = () => {
-    console.log('Editing task',task.id);
+    onEdit(task.id);
     }
-    
+
     const handleDelete = () => {
-    console.log('Deleting task',task.id);
+      onDelete(task.id)
     }
 
   return (
@@ -21,12 +23,12 @@ const TaskComponent = ({task}:ITaskComponent) => {
 
 <div className='task-content' >
     <div onClick={handleEdit}>✎</div>
-    <div onClick={handleDelete}>🗑️</div>
+    <div onClick={handleDelete}>🗑️</div> 
         </div>
         <div>
             {task.description}
         </div>
-      
+
     </div>
   )
 }

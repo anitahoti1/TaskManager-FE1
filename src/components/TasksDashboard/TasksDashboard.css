@@ -4,8 +4,9 @@ body{
 
 .dashboard-page{
     color: black;
-    width: 100%;
-    height: 95vh;
+    width: 80%;
+    height: 90%;
+    margin: 0 auto;
 }
 
 
@@ -42,6 +43,37 @@ h2{
     height:calc(100% - 60px);
     justify-content: center;
     gap:20px;
-   
 
+
+}
+
+.full-page{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 900px) {
+    .full-page {
+        flex-direction: column;
+        height: auto;
+        max-width: 80%;
+    }
+
+    .top-section {
+        flex-direction: row;
+        height: auto;
+        align-items: center; 
+    }
+
+    .task-btn {
+        width: 55%;
+        height: 55%;
+        /* margin-top: 0;  */
+    }
+
+    h2 {
+        margin-top: 28px; 
+    }
 }

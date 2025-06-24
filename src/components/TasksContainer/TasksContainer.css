@@ -8,9 +8,9 @@
     border-radius: 6px;
     padding: 20px;
     width:45vh;
-    
+
     }
-    
+
     .inner-container {
     display: flex;
     flex-direction: column;
@@ -23,10 +23,10 @@
         width: 8px;
         background-color:lightgrey;
       }
-      
-    
+
+
     .container-title{
         font-weight: bold;
         position: sticky;
-        
+
     }

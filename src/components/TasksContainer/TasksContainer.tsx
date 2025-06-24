@@ -1,5 +1,5 @@
 import { ITask } from '../../types/ITask/ITask';
-import TaskComponent from './../TaskComponent/TaskComponent';
+import TaskComponent from '../TaskComponent/TaskComponent';
 import './TasksContainer.css'
 
 interface ITasksContainer {
@@ -7,21 +7,21 @@ interface ITasksContainer {
     tasks: Array<ITask>;
     backgroundColor: string;
     borderColor:string;
-
-
+    onDelete:(id:number) => void;
+    onEdit: (id:number) => void;
 }
 
-const TasksContainer = ({name,tasks,backgroundColor,borderColor}:ITasksContainer) => {
+const TasksContainer = ({name,tasks,backgroundColor,borderColor,onDelete,onEdit}:ITasksContainer) => {
   return (
     <div className='tasks-container' style={{backgroundColor:backgroundColor , borderColor:backgroundColor}}>
         <span style={{color:borderColor}}  className='container-title'>{name}</span>
         <div className='inner-container'>
-        {tasks.map((task)=>{
-            return <TaskComponent task={task}/>
-        })}
+        {tasks.map((task) => (
+          <TaskComponent key={task.id} task={task} onDelete={onDelete} onEdit={onEdit} />
+        ))}
         </div>
 
-      
+
     </div>
   )
 }
