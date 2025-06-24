@@ -2,27 +2,26 @@ import { useNavigate } from 'react-router';
 import logo from './../logo/logo.png';
 import './LandingPage.css';
 
-
 const LandingPage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className='landing-page'>
       <div className="landing-left-side">
         <div className="left-side-content">
-        <div className="titles">
+          <div className="titles">
             <h2>Task Manager</h2>
 
 
             <p>Organize, track, and prioritize tasks to stay focused and productive</p>
-            </div>
+          </div>
+          <div className="buttons">
 
-            <div className="buttons">
             <button type="button" className="signup-btn" onClick={() => navigate('/signup')}>
               Sign Up
             </button>
             <button type="button" className="login-btn" onClick={() => navigate('/login')}>
-            Log In
-          </button>
+              Log In
+            </button>
           </div>
         </div>
       </div>
