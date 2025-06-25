@@ -5,6 +5,7 @@ import EditTaskModal from '../EditTask/EditTaskModal';
 import axios from 'axios';
 import './TasksDashboard.css';
 
+
 const TasksDashboard = () => {
   // const names = [{name:"rina<3",age:"25"}, {name:"anita<3",age:"35"}];
   const [tasksFromBack, setTasksFromBack] = useState<{
@@ -46,13 +47,9 @@ const TasksDashboard = () => {
       "userIds": [""],
 
     }, { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
-
       setTasksFromBack(res.data.data);
       setTasks(res.data.data);
-
     });
-
-
   }
 
   return (
@@ -75,19 +72,6 @@ const TasksDashboard = () => {
           task={taskBeingEdited}
           onSave={async (updatedTask) => {
             await getData();
-
-
-
-
-
-
-
-
-
-
-
-
-
             setTaskBeingEdited(null);
           }}
           onCancel={() => setTaskBeingEdited(null)}
