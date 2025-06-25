@@ -11,19 +11,19 @@
     transition: box-shadow 0.3s ease;
     min-height: 87px;
     }
-
+    
     .task-component:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     }
-
+    
     .task-content {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;   
     width: 100%;
     }
-
+    
     .task-content > div {
     margin-left: 10px;
     transition: color 0.2s ease;

@@ -1,3 +1,4 @@
+
 .edit-modal {
   position: fixed;
   top: 50%;
@@ -73,37 +74,14 @@
   .modal-buttons {
     flex-direction: column;
     align-items: center; /* Center the buttons on small screens */
-
-
   }
 
   .modal-buttons button {
     width: 100%;
     margin-bottom: 10px; /* Add some space between buttons */
-
   }
 
   .modal-buttons button:last-child {
     margin-bottom: 0; /* Remove bottom margin on last button */
-
-
-
-
-
   }
 }/* EditTaskModal.css */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

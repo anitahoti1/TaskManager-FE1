@@ -11,12 +11,9 @@ const LandingPage = () => {
         <div className="left-side-content">
           <div className="titles">
             <h2>Task Manager</h2>
-
-
             <p>Organize, track, and prioritize tasks to stay focused and productive</p>
           </div>
           <div className="buttons">
-
             <button type="button" className="signup-btn" onClick={() => navigate('/signup')}>
               Sign Up
             </button>

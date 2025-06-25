@@ -71,16 +71,6 @@ setTaskBeingEdited(null);
 }}
 onCancel={() => setTaskBeingEdited(null)}
 />
-
-
-
-
-
-
-
-
-
-
 )}
 
 

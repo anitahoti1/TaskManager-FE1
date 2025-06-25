@@ -76,6 +76,13 @@ const SignUpPage = () => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/;
 
 
+
+
+
+
+
+
+
     if (!emailRegex.test(user.email)) {
       errors.email = 'Email is not valid';
       hasError = true;
@@ -111,6 +118,7 @@ const SignUpPage = () => {
     e.preventDefault();
 
     const isValid = validateInputs(user);
+
 
     if (!isValid) {
       return
