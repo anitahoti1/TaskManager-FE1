@@ -1,59 +1,96 @@
-
 import { useState, useEffect } from 'react';
 import { ITask } from '../../types/ITask/ITask';
-import { toast } from 'react-toastify';
+import axios from 'axios';
 import './EditTaskModal.css';
 
-interface Props {
+interface IEditTaskModal {
   task: ITask;
   onSave: (updatedTask: ITask) => void;
   onCancel: () => void;
 }
 
-const EditTaskModal = ({ task, onSave, onCancel }: Props) => {
-  const [title, setTitle] = useState(task.title);
-  const [description, setDescription] = useState(task.description);
-  const [assigneeId, setAssigneeId] = useState(task.assigneeId);
-  const [status, setStatus] = useState(task.status);
+const EditTaskModal = ({ task, onSave, onCancel }: IEditTaskModal) => {
+  const [formData, setFormData] = useState<ITask>({ ...task });
+  const [users, setUsers] = useState<any[]>([]);
+  const [error, setError] = useState('');
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImI5YzhiOWY1LTM4MjEtNGNmNy05Y2MxLTFmMjY1ZjhiYzkwZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuaXRhIGhvdGkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJuaXRhQGxpdmUuY29tIiwiU2VjdXJpdHlTdGFtcCI6IkRFUE9FMjRaTFhNMkNPWFBLSkI2S1ZZSllGNDJMREFBIiwiZXhwIjoxNzQ2NzI2NTI3LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTg3IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE4NyJ9.YchAPKD0OziLETccwHNdBbIgSfcH4j0R8ZXHY1ycQTA";
 
-  const handleSubmit = () => {
-    if (!title.trim() || !description.trim()) {
-      toast.error("Title and Description are required!");
+  useEffect(() => {
+    axios.get('https://localhost:7187/api/Users/users', {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((res) => {
+      setUsers(res.data.data);
+    }).catch((err) => {
+      setError("Failed to fetch users.");
+    });
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    if (!formData.title || !formData.description || !formData.assigneeId || !formData.status) {
+      setError("All inputs required.");
       return;
     }
 
-    onSave({
-      ...task,
-      title,
-      description,
-      assigneeId,
-      status,
-    });
+    try {
+      const res = await axios.put(`https://localhost:7187/api/Issue/${formData.id}`, {...formData, priority:1}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
-    toast.success("Task updated successfully!");
+
+
+
+      if (res.status === 200) {
+        onSave(res.data);
+      } else {
+        setError("Update failed. Try again.");
+      }
+    } catch (err) {
+      setError("Something went wrong.");
+    }
   };
 
   return (
-    <div className="edit-modal">
-      <h3>Edit Task</h3>
-      <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-      <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
-      <input
-        type="number"
-        value={assigneeId}
-        onChange={(e) => setAssigneeId(Number(e.target.value))}
-        placeholder="Assignee ID"
-      />
-      <select value={status} onChange={(e) => setStatus(Number(e.target.value))}>
-        <option value={1}>To Do</option>
-        <option value={2}>In Progress</option>
-        <option value={3}>Review</option>
-        <option value={4}>Done</option>
-      </select>
-      <div className="modal-buttons">
-      <button onClick={onCancel}>Cancel</button>
-        <button onClick={handleSubmit}>Save</button>
-        
+    <div className="edit-modal-overlay">
+      <div className="edit-modal">
+        <h2>Edit Task</h2>
+        <div className="edit-task-actions">
+          <label>Title</label>
+          <input name="title" value={formData.title} onChange={handleChange} />
+
+          <label>Description</label>
+          <textarea name="description" value={formData.description} onChange={handleChange} />
+
+          <label>Assignee</label>
+          <select name="assigneeId" value={formData.assigneeId} onChange={handleChange}>
+            <option value="">Select Assignee</option>
+            {users.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.fullName}
+              </option>
+            ))}
+          </select>
+
+          <label>Status</label>
+          <select name="status" value={formData.status} onChange={handleChange}>
+            <option value="toDo">To Do</option>
+            <option value="inprogress">In Progress</option>
+            <option value="review">Review</option>
+            <option value="done">Done</option>
+          </select>
+
+          {error && <div className="error-message">{error}</div>}
+
+
+          <div className="modal-buttons">
+            <button onClick={handleSubmit}>Save</button>
+            <button onClick={onCancel}>Cancel</button>
+          </div>
+        </div>
       </div>
     </div>
   );

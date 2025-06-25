@@ -9,12 +9,10 @@ import LandingPage from "./../LandingPage/LandingPage";
 import TasksDashboard from "../components/TasksDashboard/TasksDashboard";
 
 const routes = createBrowserRouter([
-    { path: "/", Component: TasksDashboard },
-    { path: "/login", element: <PublicRoute><Login/></PublicRoute> },
+   { path: "/", Component: LandingPage },
+    { path: "/login", Component: Login },
     { path: "/signup", Component: SignUpPage },
-    { path: "/dashboard", element: <ProtectedRoute><Dashboard/></ProtectedRoute>},
-
-
+    { path: "/tasksdashboard", Component: TasksDashboard }
   ]);
 
   export default routes;

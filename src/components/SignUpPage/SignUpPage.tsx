@@ -59,7 +59,6 @@ const SignUpPage = () => {
     confirmPassword: '',
     birthday: ''
   });
-  console.log("formErrors", formErrors)
   const validateInputs = (user: IUser): boolean => {
 
     let errors = {

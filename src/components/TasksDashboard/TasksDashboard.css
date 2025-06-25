@@ -43,7 +43,7 @@ h2{
     height:calc(100% - 60px);
     justify-content: center;
     gap:20px;
-   
+
 
 }
 
@@ -55,26 +55,47 @@ h2{
 }
 
 @media (max-width: 900px) {
-    .full-page {
+
+    .full-page{
+        height: auto;
+        width: 100vh;
+    }
+
+    .tasks-list {
+        display: flex;
         flex-direction: column;
         height: auto;
-        max-width: 80%;
+        max-width: 100%;
     }
 
     .top-section {
+        display: flex;
         flex-direction: row;
-        height: auto;
+       
         align-items: center; 
     }
 
     .task-btn {
-        width: 55%;
-        height: 55%;
-        /* margin-top: 0;  */
+        width: 80%;
+        height: 80%;
+        justify-content: flex-start;
     }
 
-    h2 {
-        margin-top: 28px; 
-    }
+   .title{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+   }
 
 }
+
+/*
+width: 100%;
+    background-color: #6f47c7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    max-width: 80%;
+*/

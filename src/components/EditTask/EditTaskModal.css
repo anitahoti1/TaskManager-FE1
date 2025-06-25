@@ -1,68 +1,103 @@
 
-.edit-modal {
+.edit-modal-overlay {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.edit-modal {
+  position: relative;
   background: #ffffff;
   color: #000000;
   border: 2px solid #9a79e0;
   border-radius: 8px;
   padding: 20px;
-  width: 350px; /* Adjusted for better spacing */
-  z-index: 999;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-}
-
-.edit-modal h3 {
-  margin-bottom: 15px; /* Increased margin for better spacing */
-  color: #9a79e0;
-  text-align: center; /* Center the title */
+  width: 35%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .edit-modal input,
 .edit-modal textarea,
 .edit-modal select {
-  background-color: #ffffff;
+  background-color: #f9f9f9;
   color: #000000;
   width: 100%;
-  margin: 10px 0; /* Increased margin for better spacing */
+  margin: 10px 0;
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   box-sizing: border-box;
-  font-size: 14px; /* Increased font size for readability */
+  font-size: 14px;
+}
+
+.edit-modal input:focus,
+.edit-modal textarea:focus,
+.edit-modal select:focus {
+  border-color: #9a79e0;
+  outline: none;
+  box-shadow: 0 0 3px #9a79e0;
 }
 
 .edit-modal textarea {
-  height: 100px; /* Set a fixed height for the textarea */
+  height: 100px;
 }
 
 .modal-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .modal-buttons button {
-  background-color: #aaa;
-  padding: 10px 15px;
-  width: 48%; /* Adjusted button width to fit better */
+  background-color: #9a79e0;
+  color: white;
+  width: 25%;
   border-radius: 4px;
   border: none;
   font-size: 14px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  color: #9a79e0;
+}
+
+
+.modal-buttons button:first-child {
+  background-color: #9a79e0;
+  color: white;
+
 }
 
 .modal-buttons button:last-child {
-  background-color: #9a79e0;
-  color: white;
-  cursor: pointer;
-}
-
-.modal-buttons button:first-child {
   background-color: #f1f1f1;
   color: #333;
-  cursor: pointer;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 80px;
 }
 
 @media (max-width: 480px) {
@@ -73,15 +108,15 @@
 
   .modal-buttons {
     flex-direction: column;
-    align-items: center; /* Center the buttons on small screens */
+    align-items: center; 
   }
 
   .modal-buttons button {
     width: 100%;
-    margin-bottom: 10px; /* Add some space between buttons */
+    margin-bottom: 10px; 
   }
 
   .modal-buttons button:last-child {
-    margin-bottom: 0; /* Remove bottom margin on last button */
+    margin-bottom: 0; 
   }
-}/* EditTaskModal.css */
+}

@@ -8,21 +8,21 @@ interface ITasksContainer {
     backgroundColor: string;
     borderColor:string;
     onDelete:(id:number) => void;
-    onEdit: (id:number) => void;
+    setTaskToEdit: (task: ITask) => void;
 }
 
-const TasksContainer = ({name,tasks,backgroundColor,borderColor,onDelete,onEdit}:ITasksContainer) => {
-  console.log(tasks,"at container")
+const TasksContainer = ({name,tasks,backgroundColor,borderColor,onDelete,setTaskToEdit}:ITasksContainer) => {
+
   return (
     <div className='tasks-container' style={{backgroundColor:backgroundColor , borderColor:backgroundColor}}>
-        <span style={{color:borderColor}}  className='container-title'>{name}</span>
+        <span style={{color:borderColor}}  className='container-title'>{name} </span>
         <div className='inner-container'>
-        {tasks && tasks.length > 0 && tasks.map((task) => (
-          <TaskComponent key={task.id} task={task} onDelete={onDelete} onEdit={onEdit} />
-        ))}
+          {tasks && tasks.length > 0 && tasks.map((task) => (
+            <TaskComponent key={task.id} task={task} onDelete={onDelete} setTaskToEdit={setTaskToEdit} />
+          ))}
         </div>
 
-      
+
     </div>
   )
 }

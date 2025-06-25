@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router';
-import logo from '../../logo/logo.png';
+import logo from '../logo/logo.png';
 import './LandingPage.css';
 
 
