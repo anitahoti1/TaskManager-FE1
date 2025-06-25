@@ -1,10 +1,14 @@
-import { useEffect, useState } from 'react';
+import { ETaskStatus } from '../../enums/ETaskStatus/ETaskStatus';
+import NewTaskModal from '../NewTaskModal';
+
 import { ITask } from '../../types/ITask/ITask';
 import TasksContainer from '../TasksContainer/TasksContainer';
+
+
 import EditTaskModal from '../EditTask/EditTaskModal';
 import axios from 'axios';
 import './TasksDashboard.css';
-
+import { useEffect, useState } from 'react';
 
 const TasksDashboard = () => {
   // const names = [{name:"rina<3",age:"25"}, {name:"anita<3",age:"35"}];
@@ -21,7 +25,7 @@ const TasksDashboard = () => {
   });
   const [tasks, setTasks] = useState<Array<ITask>>([]);
   const [taskBeingEdited, setTaskBeingEdited] = useState<ITask | null>(null);
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImI5YzhiOWY1LTM4MjEtNGNmNy05Y2MxLTFmMjY1ZjhiYzkwZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuaXRhIGhvdGkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJuaXRhQGxpdmUuY29tIiwiU2VjdXJpdHlTdGFtcCI6IkRFUE9FMjRaTFhNMkNPWFBLSkI2S1ZZSllGNDJMREFBIiwiZXhwIjoxNzQ2NzI2NTI3LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTg3IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE4NyJ9.YchAPKD0OziLETccwHNdBbIgSfcH4j0R8ZXHY1ycQTA";
+  const token = localStorage.getItem('token');
 
 //
 
@@ -29,6 +33,7 @@ const TasksDashboard = () => {
     getData();
   },[])
 
+const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
   const handleDeleteTask = (id: number) => {
     axios.delete(`https://localhost:7187/api/Issue/${id}`, { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
       if(res.status == 200) {
@@ -57,7 +62,8 @@ const TasksDashboard = () => {
       <div className='dashboard-page'>
         <div className="top-section">
           <h2 className='title'>Tasks</h2>
-          <button className='task-btn'>New Task ✚ </button>
+          <button className='task-btn' onClick={() => setIsNewTaskModalOpen(true)}>New Task ✚ </button>
+
         </div>
         <div className="tasks-list">
           <TasksContainer name='To Do' tasks={tasksFromBack.toDo} backgroundColor='rgba(188, 206, 234 , 0.3)' borderColor='rgb(83, 135, 219)' onDelete={handleDeleteTask} setTaskToEdit={setTaskToEdit} />
@@ -78,9 +84,23 @@ const TasksDashboard = () => {
         />
       )}
 
+{isNewTaskModalOpen && (
+      <NewTaskModal
+        onClose={() => setIsNewTaskModalOpen(false)}
+        onTaskCreated={(task) => {
 
-    </div>
-  )
-}
+          setIsNewTaskModalOpen(false);
+        }}
+      />
+    )}
+
+
+
+</div>
+
+
+
+
+)}
 
 export default TasksDashboard

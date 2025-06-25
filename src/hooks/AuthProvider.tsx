@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import { useContext, createContext, useState, PropsWithChildren, Dispatch, SetStateAction, useEffect } from "react";
 
@@ -20,20 +21,20 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         useEffect(() => {
             const accessToken = localStorage.getItem('token');
             const user = localStorage.getItem('user');
-        
+
             if (accessToken) {
-                
-                axios.get('http://localhost:5080/api/Auth/GetAuth', {
+
+                axios.get('https://localhost:7187/api/Auth/GetAuth', {
                     headers: {
                         'Authorization': `Bearer ${accessToken}`
                     }
                 })
                     .then(function () {
-    
+
                     setIsAuthenticated(true);
                        user && setUser(JSON.parse(user))
                        setIsLoading(false);
-                      
+
                     })
                     .catch(function (error) {
                             localStorage.clear();
@@ -49,7 +50,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
                 setIsLoading(false);
                 setIsAuthenticated(false);
             }
-    
+
         }, [])
 
     return (

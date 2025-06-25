@@ -1,4 +1,3 @@
-
 import { ITask } from '../../types/ITask/ITask'
 import './TaskComponent.css'; 
 

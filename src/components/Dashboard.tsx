@@ -66,8 +66,7 @@ const Dashboard: React.FC = () => {
           <h2>Welcome {user.firstName}</h2>
           {/* <p>You have {totalTasks} project{totalTasks !== 1 ? 's' : ''}to finish and already completed 100% from your monthly level. Keep going to your goal.</p> */}
           <p>You have 0 project to finish and already completed 100% from your monthly level. Keep going to your goal.</p>
-          <button className="tasks-button">View Tasks</button>
-
+       <button className="tasks-button" onClick={()=>navigate('/tasksdashboard')}>View Tasks</button>
         </div>
         <div className="welcome-img">
           <img src={userImage} alt="User" className='welcome-img' />

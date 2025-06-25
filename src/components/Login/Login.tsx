@@ -10,7 +10,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useAuth } from "../../hooks/AuthProvider";
 
 
-
 const Login = () => {
     const [email, setEmail] = useState<string>('');
     const [hasError, setHasError] = useState<boolean>(false);
@@ -24,35 +23,10 @@ const Login = () => {
         borderColor: "red",
     };
 
-    
+
 
     const navigate = useNavigate();
     const { setUser,setIsAuthenticated} = useAuth();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -97,7 +71,7 @@ const Login = () => {
         }
 
         setLoading(true);
-        const res = await axios.post('http://localhost:5080/api/Auth/login', {
+        const res = await axios.post('https://localhost:7187/api/Auth/login', {
             userName: email,
             password: password
         })
@@ -112,14 +86,6 @@ const Login = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-
-
-
-
-
-
-
-
             })
             setLoading(false);
             return;
@@ -140,8 +106,6 @@ const Login = () => {
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
     };
-
-
 
 
     return (
@@ -192,13 +156,9 @@ const Login = () => {
                 <div className="signup-right-container">
                     <img src={Logo} alt="Logo" className="logo-img" />
                 </div>
-
             </div >
 
         </>
-
-
-
     );
 }
 

@@ -1,12 +1,15 @@
 import './NewTaskModal.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ITask } from '../types/ITask/ITask';
+import { Token } from '@mui/icons-material';
+
 
 interface Props {
   onClose: () => void;
   onTaskCreated: (newTask: ITask) => void;
 }
+
 
 const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
   const [title, setTitle] = useState('');
@@ -15,16 +18,32 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
   const [status, setStatus] = useState('To Do');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const token = localStorage.getItem('token');
+  const [users, setUsers] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios.get('https://localhost:7187/api/Users/users', {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((res) => {
+      setUsers(res.data.data);
+    }).catch((err) => {
+      setError("Failed to fetch users.");
+    });
+  }, []);
+
 
   const handleSubmit = async () => {
+   
     if (!title.trim()) {
       setError('Title is required.');
       return;
     }
-
+console.log("token,",token)
+  
+     
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:5080/api/Issue', {
+      const response = await axios.post('https://localhost:7187/api/Issue', {
+
         title,
         description,
         assigneeId,
@@ -66,19 +85,27 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
           onChange={(e) => setAssigneeId(e.target.value)}
         /> */}
 
-        <select value={assigneeId} onChange={(e) => setAssigneeId(e.target.value)}>
-          <option value="assigneeId">6cf1ec27-ca19-49d1-9136-15d4b22ea3d1</option>
-          <option value="assigneeId">6cf1ec27-ca19-49d1-9136-15d4b22ea3d1</option>
-          <option value="assigneeId">6cf1ec27-ca19-49d1-9136-15d4b22ea3d1</option>
-
-
+          <label>Assignee</label>
+          <select name="assigneeId" value={assigneeId} onChange={(e)=>setAssigneeId(e.target.value)}>
+            <option value="">Select Assignee</option>
+            {users.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.fullName}
+              </option>
+            ))}
           </select>
 
+          <select name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value="toDo">To Do</option>
+            <option value="inprogress">In Progress</option>
+            <option value="review">Review</option>
+            <option value="done">Done</option>
+          </select>
 
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="To Do">To Do</option>
+      
 
-        </select>
+
+
         {error && <p className="error">{error}</p>}
         {success && <p className="success">{success}</p>}
         <div className="buttons">
