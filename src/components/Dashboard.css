@@ -1,0 +1,98 @@
+.dashboard {
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ebebeb;
+    min-height: 100vh;
+  }
+  
+  .welcome-card {
+    background-color: #6f47c7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  
+  .welcome-card h2 {
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .welcome-card h3 {
+    color: #6f47c7;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-card p {
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .tasks-button {
+    background-color: white;
+    color: #b34b68;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+  }
+  
+  .tasks-button:hover {
+    background-color: #ffe4ea;
+  }
+  
+  .welcome-img {
+    width: 120px;
+    height: auto;
+  }
+  
+  .task-summary {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .task-card {
+    flex: 1;
+    min-width: 120px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
+  .task-card h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .task-card p {
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .task-card.red h4 { color: #f80000; }
+  .task-card.yellow h4 { color: #cadb2e; }
+  .task-card.green  h4 { color: #5a9de2; }
+  .task-card.blue h4 { color: #09ff00; }
+
+  .task-controls {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .task-controls button {
+    padding: 4px 8px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
