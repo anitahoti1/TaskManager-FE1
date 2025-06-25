@@ -12,11 +12,11 @@ import { useAuth } from "../../hooks/AuthProvider";
 
 
 const Login = () => {
-    const [email, setEmail] = useState<string>('coli1@live.com');
+    const [email, setEmail] = useState<string>('');
     const [hasError, setHasError] = useState<boolean>(false);
     const [hasLoading, setLoading] = useState<boolean>(false);
     const [, setHasPasswordError] = useState<boolean>(false);
-    const [password, setPassword] = useState<string>('Coli123*.');
+    const [password, setPassword] = useState<string>('');
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
     const override: CSSProperties = {
         display: "block",
