@@ -5,14 +5,17 @@ import SignUpPage from "../components/SignUpPage/SignUpPage";
 import  Dashboard  from "../components/Dashboard";
 import ProtectedRoute from "./../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "./../components/PublicRoute/PublicRoute";
-import LandingPage from "./../LandingPage/LandingPage";
+import LandingPage from "../components/LandingPage/LandingPage";
 import TasksDashboard from "../components/TasksDashboard/TasksDashboard";
 
 const routes = createBrowserRouter([
-   { path: "/", Component: LandingPage },
-    { path: "/login", Component: Login },
+    { path: "/", Component: TasksDashboard },
+    { path: "/login", element: <PublicRoute><Login/></PublicRoute> },
     { path: "/signup", Component: SignUpPage },
-    { path: "/tasksdashboard", Component: TasksDashboard }
+    { path: "/dashboard", element: <ProtectedRoute><Dashboard/></ProtectedRoute>},
+    { path: "/tasksdashboard", element: <ProtectedRoute><TasksDashboard/></ProtectedRoute>}
+
+
   ]);
 
   export default routes;

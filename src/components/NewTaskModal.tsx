@@ -1,18 +1,17 @@
 import './NewTaskModal.css';
 import { useState } from 'react';
 import axios from 'axios';
-import { ITask } from '../../types/ITask/ITask';
+import { ITask } from '../types/ITask/ITask';
 
 interface Props {
   onClose: () => void;
   onTaskCreated: (newTask: ITask) => void;
 }
 
-
 const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [assignee, setAssignee] = useState('');
+  const [assigneeId,setAssigneeId] = useState('');
   const [status, setStatus] = useState('To Do');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -24,15 +23,16 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
     }
 
     try {
-        const token = 'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImI5YzhiOWY1LTM4MjEtNGNmNy05Y2MxLTFmMjY1ZjhiYzkwZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJuaXRhIGhvdGkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJuaXRhQGxpdmUuY29tIiwiU2VjdXJpdHlTdGFtcCI6IkRFUE9FMjRaTFhNMkNPWFBLSkI2S1ZZSllGNDJMREFBIiwiZXhwIjoxNzQ2NDU2MzMxLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MTg3IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzE4NyJ9.VZPRW9uZoM3EM3AgXnSIAvjwPRQsF3scQ8sMKAF5Fy4';
-        const response = await axios.post('http://localhost:5080/api/Issue', {
-          title,
-          description,
-          assignee,
-          status
-        }, {
-          headers: { Authorization: `Bearer {token}` }
-        });
+      const token = localStorage.getItem('token');
+      const response = await axios.post('http://localhost:5080/api/Issue', {
+        title,
+        description,
+        assigneeId,
+        status,
+        priority:1
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
 
       onTaskCreated(response.data);
@@ -58,15 +58,26 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <input
-          type="text"
+
+         {/* <textarea
+         
           placeholder="Assignee"
-          value={assignee}
-          onChange={(e) => setAssignee(e.target.value)}
-        />
+          value={assigneeId}
+          onChange={(e) => setAssigneeId(e.target.value)}
+        /> */}
+
+        <select value={assigneeId} onChange={(e) => setAssigneeId(e.target.value)}>
+          <option value="assigneeId">6cf1ec27-ca19-49d1-9136-15d4b22ea3d1</option>
+          <option value="assigneeId">6cf1ec27-ca19-49d1-9136-15d4b22ea3d1</option>
+          <option value="assigneeId">6cf1ec27-ca19-49d1-9136-15d4b22ea3d1</option>
+
+
+          </select>
+
+
         <select value={status} onChange={(e) => setStatus(e.target.value)}>
           <option value="To Do">To Do</option>
-          
+
         </select>
         {error && <p className="error">{error}</p>}
         {success && <p className="success">{success}</p>}
