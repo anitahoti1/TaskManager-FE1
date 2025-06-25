@@ -1,0 +1,30 @@
+.task-component {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100px;
+    border: 1px solid transparent;
+    min-width: 200px;
+    border-radius: 6px;
+    padding: 10px;
+    background-color:rgba(255,255,255,0.33);
+    transition: box-shadow 0.3s ease;
+    min-height: 87px;
+    }
+    
+    .task-component:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    }
+    
+    .task-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;   
+    width: 100%;
+    }
+    
+    .task-content > div {
+    margin-left: 10px;
+    transition: color 0.2s ease;
+    }

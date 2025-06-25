@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import PasswordInput from '../PasswordInput/PasswordInput';
 import DefaultInput from '../../DefaultInput/DefaultInput';
 import { useNavigate } from 'react-router';
-import axios  from 'axios';
+import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
 interface IUser {
@@ -50,7 +50,7 @@ const SignUpPage = () => {
     else if (strength < 80) setColor('orange');
     else setColor('green');
   }, [user.password]);
-  const [ backMessage,setBackMessage] = useState<string| undefined>(undefined);
+  const [backMessage, setBackMessage] = useState<string | undefined>(undefined);
   const [formErrors, setFormErrors] = useState({
     firstName: '',
     lastName: '',
@@ -59,7 +59,6 @@ const SignUpPage = () => {
     confirmPassword: '',
     birthday: ''
   });
-    console.log("formErrors",formErrors)
   const validateInputs = (user: IUser): boolean => {
 
     let errors = {
@@ -74,6 +73,13 @@ const SignUpPage = () => {
     let hasError = false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/;
+
+
+
+
+
+
+
 
 
     if (!emailRegex.test(user.email)) {
@@ -112,10 +118,11 @@ const SignUpPage = () => {
 
     const isValid = validateInputs(user);
 
-    if (!isValid) {
-    return
 
-    }else {
+    if (!isValid) {
+      return
+
+    } else {
       setBackMessage(undefined);
     axios({
       method: 'post',
@@ -127,30 +134,32 @@ const SignUpPage = () => {
         birthdate: user.birthday,
         password: user.password
 
-      }
-    }).then(function (response) {
-      if(response.data.status === false){
+        }
+      }).then(function (response) {
+        if (response.data.status === false) {
+          toast.error('Unable to register. Email is already taken.',
+            {
+              position: 'top-right',
+            });
+          //setBackMessage(response.data.errors[0].message);
 
+        } else {
+          toast.success('Registration successful. You can now log in.', {
+            position: 'top-right',
+            onClose: () => navigate('/login'),
+          })
+        }
 
-          setBackMessage(response.data.errors[0].message);
-
-      }else {
-        toast.success('User registered,now you can login' , {
-          position:'top-right',
-          onClose: () => navigate('/login'),
-        })
-      }
-
-    });
-    setFormErrors({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      birthday: ''
-    });
-  }
+      });
+      setFormErrors({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        birthday: ''
+      });
+    }
   };
 
 
@@ -171,8 +180,8 @@ const SignUpPage = () => {
             <p>Fill the form below to create your account</p>
 
             <DefaultInput
-            required={true}
-            autoComplete={true}
+              required={true}
+              autoComplete={true}
               type="text"
               value={user.firstName}
               onChange={(e) => handleChange('firstName', e.target.value)}
@@ -189,7 +198,7 @@ const SignUpPage = () => {
             />
 
             <DefaultInput
-              required={true}      
+              required={true}
               autoComplete={true}
               type="text"
               value={user.email}
@@ -219,7 +228,8 @@ const SignUpPage = () => {
 
             <DatePicker
               selected={user.birthday}
-              onChange={(date) => {handleChange('birthday', date)
+              onChange={(date) => {
+                handleChange('birthday', date)
 
               }}
               placeholderText="Enter your birthday"
@@ -232,7 +242,7 @@ const SignUpPage = () => {
             />
             <span className="error-text">{formErrors.birthday}</span>
 
-              <ToastContainer />
+            <ToastContainer />
             <button type="submit" className="submit-btn">Sign Up</button>
 
             <p>Already have an account? <a href="/login" onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {

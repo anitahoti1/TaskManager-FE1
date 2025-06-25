@@ -1,0 +1,122 @@
+
+.edit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.edit-modal {
+  position: relative;
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #9a79e0;
+  border-radius: 8px;
+  padding: 20px;
+  width: 35%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.edit-modal input,
+.edit-modal textarea,
+.edit-modal select {
+  background-color: #f9f9f9;
+  color: #000000;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.edit-modal input:focus,
+.edit-modal textarea:focus,
+.edit-modal select:focus {
+  border-color: #9a79e0;
+  outline: none;
+  box-shadow: 0 0 3px #9a79e0;
+}
+
+.edit-modal textarea {
+  height: 100px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  background-color: #9a79e0;
+  color: white;
+  width: 25%;
+  border-radius: 4px;
+  border: none;
+  font-size: 14px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  color: #9a79e0;
+}
+
+
+.modal-buttons button:first-child {
+  background-color: #9a79e0;
+  color: white;
+
+}
+
+.modal-buttons button:last-child {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 80px;
+}
+
+@media (max-width: 480px) {
+  .edit-modal {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    align-items: center; 
+  }
+
+  .modal-buttons button {
+    width: 100%;
+    margin-bottom: 10px; 
+  }
+
+  .modal-buttons button:last-child {
+    margin-bottom: 0; 
+  }
+}

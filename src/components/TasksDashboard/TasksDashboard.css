@@ -1,0 +1,100 @@
+body{
+    background-color: white;
+}
+
+.dashboard-page{
+    color: black;
+    width: 80%;
+    height: 90%;
+    margin: 0 auto;
+}
+
+
+.top-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:15px;
+    height:60px;
+    margin-bottom: 10px;
+}
+.task-btn{
+    width: 15%;
+    height: 85%;
+    background-color: #9a79e0;
+    color: #fff;
+    margin-top: 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+h2{
+    margin-top: 25px;
+    font-size: 30px;
+    color:  #9a79e0;
+}
+
+.tasks-list{
+    display: flex;
+    width:100%;
+    height:calc(100% - 60px);
+    justify-content: center;
+    gap:20px;
+
+
+}
+
+.full-page{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 900px) {
+
+    .full-page{
+        height: auto;
+        width: 100vh;
+    }
+
+    .tasks-list {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .top-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center; 
+    }
+
+    .task-btn {
+        width: 80%;
+        height: 80%;
+        justify-content: flex-start;
+    }
+
+   .title{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+   }
+
+}
+
+/*
+width: 100%;
+    background-color: #6f47c7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    max-width: 80%;
+*/

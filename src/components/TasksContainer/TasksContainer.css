@@ -1,0 +1,32 @@
+.tasks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: calc(100% - 40px);
+    border: 2px solid; 
+    min-width: 200px;
+    border-radius: 6px;
+    padding: 20px;
+    width:45vh;
+ 
+    }
+
+    .inner-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: none;
+    overflow-y: auto;
+    }
+
+    div::-webkit-scrollbar {
+        width: 8px;
+        background-color:lightgrey;
+      }
+
+
+    .container-title{
+        font-weight: bold;
+        position: sticky;
+
+    }

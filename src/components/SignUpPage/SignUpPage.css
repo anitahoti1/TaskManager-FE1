@@ -9,23 +9,25 @@
   height: 100vh;
   width:100%
  } */
- .signup-form {
+.signup-form {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100%;
   box-sizing: border-box;
- }
- .signup-right-container {
+}
+
+.signup-right-container {
   background-color: #6c40cc;
   width: 50%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
- }
- .signup-left-container {
+}
+
+.signup-left-container {
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -35,32 +37,34 @@
   width: 50%;
   height: 100%;
 
- }
- .signup-left-container,
+}
+
+.signup-left-container,
 .signup-right-container {
   flex: 1;
 
 }
 
-.form-content{
+.form-content {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 
- .signup-left-container h2 {
+.signup-left-container h2 {
   margin-bottom: 10px;
   font-size: 24px;
   font-weight: bold;
   color: #000;
- }
- .signup-left-container p {
+}
+
+.signup-left-container p {
   margin-bottom: 20px;
   color: #666;
- }
+}
 
- input[type="text"] {
+input[type="text"] {
   background-color: #ffffff;
   color: #000000;
   border: 1px solid #ccc;
@@ -70,8 +74,9 @@
   font-size: 14px;
   width: 100%;
   max-width: 75%;
- }
- input[type="email"] {
+}
+
+input[type="email"] {
   background-color: #ffffff;
   color: #000000;
   border: 1px solid #ccc;
@@ -81,8 +86,9 @@
   font-size: 14px;
   width: 100%;
   max-width: 75%;
- }
- input[type="password"] {
+}
+
+input[type="password"] {
   background-color: #ffffff;
   color: #000000;
   border: 1px solid #ccc;
@@ -92,9 +98,9 @@
   font-size: 14px;
   width: 100%;
   max-width: 75%;
- }
+}
 
- .date-picker-input{
+.date-picker-input {
   background-color: #ffffff;
 
   border: 1px solid #ccc;
@@ -106,26 +112,28 @@
   cursor: pointer;
   filter: invert(0);
   opacity: 0.8;
- }
+}
 
 
- .react-datepicker__input-container {
+.react-datepicker__input-container {
   position: relative;
 }
 
 .react-datepicker-wrapper {
-  padding:2px;
+  padding: 2px;
   margin-bottom: 15px;
   border-radius: 6px;
   font-size: 14px;
-  width:100%;
+  width: 100%;
 }
 
 
- ::-webkit-calendar-picker-indicator {
-    filter: invert(1);
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
- button[type="submit"] {
+
+button[type="submit"] {
   width: 100%;
   background-color: #6f47c7;
   color: white;
@@ -135,58 +143,62 @@
   cursor: pointer;
   max-width: 80%;
 
- }
- button[type="submit"]:hover {
-  background-color: #5b34b3;
- }
+}
 
- .logo-img {
+button[type="submit"]:hover {
+  background-color: #5b34b3;
+}
+
+.logo-img {
   max-width: 80%;
   max-height: 80%;
   object-fit: contain;
   margin: auto;
- }
+}
 
- 
- .signup-form-content {
+
+.signup-form-content {
   width: 70%;
 }
- 
-.error-text{
+
+.error-text {
   color: red;
   display: flex;
 }
 
- 
+
 @media (max-width: 900px) {
   .signup-form {
     flex-direction: column-reverse;
     height: auto;
 
   }
+
   .signup-left-container {
     width: 100%;
-    border-radius:0;
+    border-radius: 0;
     height: 40%;
   }
+
   .signup-right-container {
     width: 100%;
     height: auto;
     justify-content: center;
-    align-items:center ;
-    border-radius:0;
+    align-items: center;
+    border-radius: 0;
   }
+
   .logo-img {
     width: 100%;
     max-height: 200px;
   }
- }
+}
 
- .signup-form-content {
+.signup-form-content {
   width: 70%;
 }
 
-.error-text{
+.error-text {
   color: red;
   display: flex;
 }
