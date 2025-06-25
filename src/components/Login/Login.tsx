@@ -23,7 +23,7 @@ const Login = () => {
     useEffect(() => {
         const accessToken = localStorage.getItem('token');
         if (accessToken) {
-            axios.get('http://localhost:5080/api/Auth/GetAuth',{
+            axios.get('https://localhost:7095/api/Auth/GetAuth',{
                 headers:{
                 'Authorization': `Bearer ${accessToken}`
          } })
@@ -74,7 +74,7 @@ const Login = () => {
         event.preventDefault();
         setHasError(!validateEmail(email));
         setHasPasswordError(!validatePassword(password));
-        axios.post('http://localhost:5080/api/Auth/login', {
+        axios.post('https://localhost:7095/api/Auth/login', {
             userName: email,
             password: password
         })

@@ -119,7 +119,7 @@ const SignUpPage = () => {
       setBackMessage(undefined);
     axios({
       method: 'post',
-      url: 'https://localhost:7187/api/Auth/register',
+      url: 'https://localhost:7095/api/Auth/register',
       data: {
         userName: user.email,
         firstName: user.firstName,
