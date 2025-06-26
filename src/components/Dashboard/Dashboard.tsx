@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from 'react';
 import './Dashboard.css';
-import userImage from './../assets/user.jpg';
-import { useAuth } from '../hooks/AuthProvider';
+import userImage from "../../assets/user.jpg";
+import { useAuth } from "./../../hooks/AuthProvider";
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 // import { AuthContext } from '../contexts/Authcontext';
@@ -69,8 +69,9 @@ const Dashboard: React.FC = () => {
        <button className="tasks-button" onClick={()=>navigate('/tasksdashboard')}>View Tasks</button>
         </div>
         <div className="welcome-img">
-          <img src={userImage} alt="User" className='welcome-img' />
-        </div>
+         <button className="tasks-button" onClick={()=> {navigate('/tasksdashboard');
+            console.log("test");
+          }}>View Tasks</button>        </div>
       </div>
       <div className="task-summary">
         {taskSummary.map((task, idx) => (
