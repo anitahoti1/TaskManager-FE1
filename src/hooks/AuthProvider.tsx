@@ -24,7 +24,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
             if (accessToken) {
 
-                axios.get('https://localhost:7187/api/Auth/GetAuth', {
+                axios.get('https://localhost:7095/api/Auth/GetAuth', {
                     headers: {
                         'Authorization': `Bearer ${accessToken}`
                     }

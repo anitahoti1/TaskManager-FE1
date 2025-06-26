@@ -2,7 +2,7 @@
 import { createBrowserRouter } from "react-router";
 import Login from "../components/Login/Login";
 import SignUpPage from "../components/SignUpPage/SignUpPage";
-import  Dashboard  from "../components/Dashboard";
+import  Dashboard  from "../components/Dashboard/Dashboard";
 import ProtectedRoute from "./../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "./../components/PublicRoute/PublicRoute";
 import LandingPage from "../components/LandingPage/LandingPage";

@@ -3,7 +3,6 @@ import { ITask } from '../../types/ITask/ITask';
 import axios from 'axios';
 import './EditTaskModal.css';
 
-
 interface IEditTaskModal {
   task: ITask;
   onSave: (updatedTask: ITask) => void;
@@ -15,8 +14,9 @@ const EditTaskModal = ({ task, onSave, onCancel }: IEditTaskModal) => {
   const [users, setUsers] = useState<any[]>([]);
   const [error, setError] = useState('');
 const token = localStorage.getItem('token');
+
   useEffect(() => {
-    axios.get('https://localhost:7187/api/Users/users', {
+    axios.get('https://localhost:7095/api/Users/users', {
       headers: { Authorization: `Bearer ${token}` },
     }).then((res) => {
       setUsers(res.data.data);
@@ -37,12 +37,9 @@ const token = localStorage.getItem('token');
     }
 
     try {
-      const res = await axios.put(`https://localhost:7187/api/Issue/${formData.id}`, {...formData, priority:1}, {
+      const res = await axios.put(`https://localhost:7095/api/Issue/${formData.id}`, {...formData, priority:1}, {
         headers: { Authorization: `Bearer ${token}` }
       });
-
-
-
 
       if (res.status === 200) {
         onSave(res.data);

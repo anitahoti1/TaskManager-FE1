@@ -1,5 +1,8 @@
-import { ChangeEvent, CSSProperties, FormEvent, useEffect, useState } from "react"
+import { ChangeEvent, CSSProperties, FormEvent, useEffect, useState } from "react" ;
+
+
 import Logo from './../../assets/logo.png'
+
 import './Login.css'
 import DefaultInput from "../../DefaultInput/DefaultInput";
 import { useNavigate } from "react-router";
@@ -10,6 +13,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useAuth } from "../../hooks/AuthProvider";
 
 
+
 const Login = () => {
     const [email, setEmail] = useState<string>('');
     const [hasError, setHasError] = useState<boolean>(false);
@@ -17,31 +21,13 @@ const Login = () => {
     const [, setHasPasswordError] = useState<boolean>(false);
     const [password, setPassword] = useState<string>('');
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+    const override: CSSProperties = {
+        display: "block",
+        margin: "0 auto",
+        borderColor: "red",
+    };
 
-   
-
-    useEffect(() => {
-        const accessToken = localStorage.getItem('token');
-        if (accessToken) {
-            axios.get('https://localhost:7095/api/Auth/GetAuth',{
-                headers:{
-                'Authorization': `Bearer ${accessToken}`
-         } })
-                .then(function (response) {
-                
-                    console.log(response);
-                   
-            
-                })
-                .catch(function (error) {
-                    
-                    console.log(error);
-                })
-                .finally(function () {
-                   
-                });
-
-
+    
 
     const navigate = useNavigate();
     const { setUser,setIsAuthenticated} = useAuth();
@@ -75,9 +61,21 @@ const Login = () => {
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
         event.preventDefault();
-        setHasError(!validateEmail(email));
-        setHasPasswordError(!validatePassword(password));
-        axios.post('https://localhost:7095/api/Auth/login', {
+
+        const isEmailValid = validateEmail(email);
+        const isPasswordValid = validatePassword(password);
+
+        setHasError(!isEmailValid);
+        setHasPasswordError(!isPasswordValid);
+
+        if (!isEmailValid || !isPasswordValid) {
+            console.log(isPasswordValid)
+            toast.error("Username or password is not correct!!!")
+            return;
+        }
+
+        setLoading(true);
+        const res = await axios.post('https://localhost:7095/api/Auth/login', {
             userName: email,
             password: password
         })
@@ -125,6 +123,23 @@ const Login = () => {
                         size={50}
                         aria-label="Loading Spinner"
                     />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
             )}
 
@@ -165,6 +180,8 @@ const Login = () => {
             </div >
 
         </>
+
+
     );
 }
 

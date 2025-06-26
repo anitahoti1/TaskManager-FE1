@@ -1,7 +1,7 @@
 import './NewTaskModal.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ITask } from '../types/ITask/ITask';
+import { ITask } from '../../types/ITask/ITask';
 import { Token } from '@mui/icons-material';
 
 
@@ -22,7 +22,7 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
   const [users, setUsers] = useState<any[]>([]);
 
   useEffect(() => {
-    axios.get('https://localhost:7187/api/Users/users', {
+    axios.get('https://localhost:7095/api/Users/users', {
       headers: { Authorization: `Bearer ${token}` },
     }).then((res) => {
       setUsers(res.data.data);
@@ -42,7 +42,7 @@ console.log("token,",token)
   
      
     try {
-      const response = await axios.post('https://localhost:7187/api/Issue', {
+      const response = await axios.post('https://localhost:7095/api/Issue', {
 
         title,
         description,

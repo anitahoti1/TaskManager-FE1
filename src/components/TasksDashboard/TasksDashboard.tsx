@@ -1,5 +1,5 @@
 import { ETaskStatus } from '../../enums/ETaskStatus/ETaskStatus';
-import NewTaskModal from '../NewTaskModal';
+import NewTaskModal from '../NewTaskModal/NewTaskModal';
 
 import { ITask } from '../../types/ITask/ITask';
 import TasksContainer from '../TasksContainer/TasksContainer';
@@ -11,7 +11,6 @@ import './TasksDashboard.css';
 import { useEffect, useState } from 'react';
 
 const TasksDashboard = () => {
-  // const names = [{name:"rina<3",age:"25"}, {name:"anita<3",age:"35"}];
   const [tasksFromBack, setTasksFromBack] = useState<{
     toDo: Array<any>,
     inprogress: Array<any>,
@@ -35,7 +34,7 @@ const TasksDashboard = () => {
 
 const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
   const handleDeleteTask = (id: number) => {
-    axios.delete(`https://localhost:7187/api/Issue/${id}`, { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
+    axios.delete(`https://localhost:7095/api/Issue/${id}`, { headers: { "Authorization": `Bearer ${token}` } }).then((res) => {
       if(res.status == 200) {
         getData();
       }
@@ -47,7 +46,7 @@ const [isNewTaskModalOpen, setIsNewTaskModalOpen] = useState(false);
   }
 
   const getData = async () => {
-    axios.post('https://localhost:7187/api/Issue/GetAllIssues', {
+    axios.post('https://localhost:7095/api/Issue/GetAllIssues', {
       "text": "",
       "userIds": [""],
 
