@@ -18,6 +18,12 @@
   box-sizing: border-box;
 }
 
+.modal input,
+.modal select,
+.modal textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+}
 .signup-right-container {
   background-color: #6c40cc;
   width: 50%;
@@ -64,7 +70,7 @@
   color: #666;
 }
 
-input[type="text"] {
+input[type="text"] ,select,textarea{
   background-color: #ffffff;
   color: #000000;
   border: 1px solid #ccc;

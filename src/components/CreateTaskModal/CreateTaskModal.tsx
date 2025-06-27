@@ -2,7 +2,7 @@
 import Modal from 'react-modal';
 import { useState } from 'react';
 import './NewTaskModal.css';
-import { ETaskStatus } from './../../enums/ETaskStatus/ETaskStatus';
+import { ETaskStatus } from '../../enums/ETaskStatus/ETaskStatus';
 import { ITask } from './../../types/ITask/ITask';
 
 interface Props {

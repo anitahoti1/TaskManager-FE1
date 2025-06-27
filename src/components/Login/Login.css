@@ -65,7 +65,7 @@
   color: #666;
 }
 
-input[type="text"] {
+input[type="text"] , select,textarea{
   background-color: #ffffff;
   color: #000000;
   border: 1px solid #ccc;
@@ -169,7 +169,9 @@ input[type="password"] {
   justify-content: center;
 }
 
+
 @media (max-width: 900px) {
+
   .signup-form {
     flex-direction: column-reverse;
     height: auto;

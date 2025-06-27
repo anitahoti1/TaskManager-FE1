@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ITask } from '../../types/ITask/ITask';
 import { Token } from '@mui/icons-material';
+import { ETaskStatus } from '../../enums/ETaskStatus/ETaskStatus';
+
 
 
 interface Props {
@@ -14,8 +16,9 @@ interface Props {
 const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [assigneeId,setAssigneeId] = useState('');
-  const [status, setStatus] = useState('To Do');
+  const [assigneeId, setAssigneeId] = useState('');
+  const [assignee, setAssignee] = useState('');
+  const [status, setStatus] = useState(ETaskStatus.ToDo);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const token = localStorage.getItem('token');
@@ -33,14 +36,14 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
 
 
   const handleSubmit = async () => {
-   
+
     if (!title.trim()) {
       setError('Title is required.');
       return;
     }
-console.log("token,",token)
-  
-     
+    console.log("token,", token)
+
+
     try {
       const response = await axios.post('https://localhost:7095/api/Issue', {
 
@@ -48,7 +51,7 @@ console.log("token,",token)
         description,
         assigneeId,
         status,
-        priority:1
+        priority: 1
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -78,31 +81,31 @@ console.log("token,",token)
           onChange={(e) => setDescription(e.target.value)}
         />
 
-         {/* <textarea
+        {/* <textarea
          
           placeholder="Assignee"
           value={assigneeId}
           onChange={(e) => setAssigneeId(e.target.value)}
         /> */}
 
-          <label>Assignee</label>
-          <select name="assigneeId" value={assigneeId} onChange={(e)=>setAssigneeId(e.target.value)}>
-            <option value="">Select Assignee</option>
-            {users.map((user) => (
-              <option key={user.id} value={user.id}>
-                {user.fullName}
-              </option>
-            ))}
-          </select>
+        <label>Assignee</label>
+        <select name="assigneeId" value={assigneeId} onChange={(e) => setAssigneeId(e.target.value)}>
+          <option value="">Select Assignee</option>
+          {users.map((user) => (
+            <option key={user.id} value={user.id}>
+              {user.fullName}
+            </option>
+          ))}
+        </select>
 
-          <select name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="toDo">To Do</option>
-            <option value="inprogress">In Progress</option>
-            <option value="review">Review</option>
-            <option value="done">Done</option>
-          </select>
+        <select value={status} onChange={(e) => setStatus(+e.target.value)}>
+          <option value={ETaskStatus.ToDo}>To Do</option>
+          <option value={ETaskStatus.Done}>Done</option>
+          <option value={ETaskStatus.InProgress}>InProgress</option>
+          <option value={ETaskStatus.Review}>Review</option>
+        </select>
 
-      
+
 
 
 

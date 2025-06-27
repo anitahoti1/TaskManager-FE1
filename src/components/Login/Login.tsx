@@ -1,8 +1,5 @@
 import { ChangeEvent, CSSProperties, FormEvent, useEffect, useState } from "react" ;
-
-
 import Logo from './../../assets/logo.png'
-
 import './Login.css'
 import DefaultInput from "../../DefaultInput/DefaultInput";
 import { useNavigate } from "react-router";
@@ -25,17 +22,10 @@ const Login = () => {
         display: "block",
         margin: "0 auto",
         borderColor: "red",
-    };
-
-    
+    };  
 
     const navigate = useNavigate();
     const { setUser,setIsAuthenticated} = useAuth();
-
-
-
-
-
 
     const validateEmail = (email: string): boolean => {
         var re = /\S+@\S+\.\S+/;
@@ -43,7 +33,7 @@ const Login = () => {
     };
 
     const validatePassword = (password: string): boolean => {
-        const re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        const re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
         return re.test(password);
     };
 
@@ -123,22 +113,6 @@ const Login = () => {
                         size={50}
                         aria-label="Loading Spinner"
                     />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 </div>
             )}
