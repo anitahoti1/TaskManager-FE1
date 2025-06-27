@@ -5,7 +5,7 @@ import './TaskComponent.css';
 interface ITaskComponent {
     task:ITask;
     onDelete:(id:number) => void;
-    setTaskToEdit:(task:ITask ) => void;
+  setTaskToEdit:(task:ITask ) => void;
 }
 
 const TaskComponent = ({task,onDelete,setTaskToEdit}:ITaskComponent) => {

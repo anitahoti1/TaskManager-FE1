@@ -68,10 +68,9 @@ const Dashboard: React.FC = () => {
           <p>You have 0 project to finish and already completed 100% from your monthly level. Keep going to your goal.</p>
        <button className="tasks-button" onClick={()=>navigate('/tasksdashboard')}>View Tasks</button>
         </div>
-        <div className="welcome-img">
-         <button className="tasks-button" onClick={()=> {navigate('/tasksdashboard');
-            console.log("test");
-          }}>View Tasks</button>        </div>
+       <div className="welcome-img">
+          <img src={userImage} alt="User" className='welcome-img' />
+        </div>
       </div>
       <div className="task-summary">
         {taskSummary.map((task, idx) => (
