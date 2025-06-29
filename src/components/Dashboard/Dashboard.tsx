@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
 
 
   const [taskSummary, setTaskSummary] = useState([
-    { label: 'ToDo', count: 0, color: 'red' },
+    { label: 'To Do', count: 0, color: 'red' },
     { label: 'In Progress', count: 0, color: 'yellow' },
     { label: 'Review', count: 0, color: 'green' },
     { label: 'Done', count: 0, color: 'blue' },
@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
         //const totalTasks = taskSummary.reduce((sum, task) => sum + task.count, 0);
 
         setTaskSummary([
-          { label: 'ToDo', count: data.toDo, color: 'red' },
+          { label: 'To Do', count: data.toDo, color: 'red' },
           { label: 'In Progress', count: data.inProgress, color: 'yellow' },
           { label: 'Review', count: data.review, color: 'green' },
           { label: 'Done', count: data.done , color: 'blue' },

@@ -71,7 +71,7 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
         <h3>Create New Task</h3>
         <input
           type="text"
-          placeholder="Title *"
+          placeholder="Title "
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -88,7 +88,6 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
           onChange={(e) => setAssigneeId(e.target.value)}
         /> */}
 
-        <label>Assignee</label>
         <select name="assigneeId" value={assigneeId} onChange={(e) => setAssigneeId(e.target.value)}>
           <option value="">Select Assignee</option>
           {users.map((user) => (

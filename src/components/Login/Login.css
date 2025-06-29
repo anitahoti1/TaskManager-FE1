@@ -53,10 +53,11 @@
 }
 
 .title {
-  margin: 1.5em 0;
+  color:#6f47c7;
   font-size: 24px;
   font-weight: bold;
-  color: #000;
+  margin-top: 8px;
+
 
 }
 
@@ -160,7 +161,7 @@ input[type="password"] {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width:100%;
   height: 100vh;
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 999;

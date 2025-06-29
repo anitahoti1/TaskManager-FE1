@@ -1,40 +1,83 @@
+/* Header logout button (icon top right) */
 .header {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     padding: 10px;
+    background-color: var(--main-bg);
+    width: 100%;
 }
-.modal-content{
+
+.logout-btn {
+    background-color: #6f47c7;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: #5637a7;
+}
+
+/* Modal layout */
+.modal-content {
     position: fixed;
-     top: 50%;
-     left: 50%;
-     transform: translate(-50%,-50%);
-    width: 50%;
-}
-.modal-title {
-    font-size: 16px;
-    margin-bottom: 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 280px;
+    padding: 24px;
+    background-color: whitesmoke;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     text-align: center;
 }
 
-.modal-buttons {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 15px;
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #111;
+}
+.modal-buttons{
+    gap:10px
 }
 
-.modal-buttons button {
-    padding: 4px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.modal-buttons > .modal-cancel-btn {
+    background-color: lightgray !important;
+    color: #333 !important;
+    border: none;
+    padding: 8px 0;
+    border-radius: 6px;
+    font-weight: 500;
+    flex: 1;
     cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: center;
 }
 
-.modal-buttons button:first-child {
-    background-color: #ffffff;
+.modal-buttons > .modal-cancel-btn:hover {
+    background-color: #b0a2a2 !important;
 }
 
-.modal-buttons button:last-child {
-    background-color: #6f47c7;
-    color: white;
+.modal-buttons > .modal-logout-btn {
+    background-color: #6f47c7 !important;
+    color: white !important;
+    border: none;
+    padding: 8px 0;
+    border-radius: 6px;
+    font-weight: 500;
+    flex: 1;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: center;
+}
+
+.modal-buttons > .modal-logout-btn:hover {
+    background-color: #5637a7 !important;
 }
