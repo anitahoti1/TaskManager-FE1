@@ -12,7 +12,8 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   //const [dashboardData, setDashboardData] = useState(null);
-
+  const roles = JSON.parse(localStorage.getItem("roles") || "[]");
+  const isAdmin = roles.includes("Admin");
 
 
 
@@ -43,7 +44,7 @@ const Dashboard: React.FC = () => {
           { label: 'To Do', count: data.toDo, color: 'red' },
           { label: 'In Progress', count: data.inProgress, color: 'yellow' },
           { label: 'Review', count: data.review, color: 'green' },
-          { label: 'Done', count: data.done , color: 'blue' },
+          { label: 'Done', count: data.done, color: 'blue' },
         ]);
       } catch (error) {
         console.error('Erorr:', error);
@@ -66,9 +67,19 @@ const Dashboard: React.FC = () => {
           <h2>Welcome {user.firstName}</h2>
           {/* <p>You have {totalTasks} project{totalTasks !== 1 ? 's' : ''}to finish and already completed 100% from your monthly level. Keep going to your goal.</p> */}
           <p>You have 0 project to finish and already completed 100% from your monthly level. Keep going to your goal.</p>
-       <button className="tasks-button" onClick={()=>navigate('/tasksdashboard')}>View Tasks</button>
+          <button className="tasks-button" onClick={() => navigate('/tasksdashboard')}>View Tasks</button>
+          {isAdmin && (
+            <button
+              className="tasks-button"
+              onClick={() => navigate('/admin')}
+              style={{ marginLeft: "10px", backgroundColor: "darkred", color: "white" }}
+            >
+              Admin Panel
+            </button>
+          )}
+
         </div>
-       <div className="welcome-img">
+        <div className="welcome-img">
           <img src={userImage} alt="User" className='welcome-img' />
         </div>
       </div>

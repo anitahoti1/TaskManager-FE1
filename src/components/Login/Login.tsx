@@ -1,6 +1,6 @@
-import { ChangeEvent, CSSProperties, FormEvent, useEffect, useState } from "react" ;
-import Logo from './../../assets/logo.png'
-import './Login.css'
+import { ChangeEvent, CSSProperties, FormEvent, useState } from "react";
+import Logo from './../../assets/logo.png';
+import './Login.css';
 import DefaultInput from "../../DefaultInput/DefaultInput";
 import { useNavigate } from "react-router";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -9,8 +9,6 @@ import { toast } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useAuth } from "../../hooks/AuthProvider";
 
-
-
 const Login = () => {
     const [email, setEmail] = useState<string>('');
     const [hasError, setHasError] = useState<boolean>(false);
@@ -18,17 +16,18 @@ const Login = () => {
     const [, setHasPasswordError] = useState<boolean>(false);
     const [password, setPassword] = useState<string>('');
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
     const override: CSSProperties = {
         display: "block",
         margin: "0 auto",
         borderColor: "red",
-    };  
+    };
 
     const navigate = useNavigate();
-    const { setUser,setIsAuthenticated} = useAuth();
+    const { setUser, setIsAuthenticated } = useAuth();
 
     const validateEmail = (email: string): boolean => {
-        var re = /\S+@\S+\.\S+/;
+        const re = /\S+@\S+\.\S+/;
         return re.test(email);
     };
 
@@ -59,48 +58,52 @@ const Login = () => {
         setHasPasswordError(!isPasswordValid);
 
         if (!isEmailValid || !isPasswordValid) {
-            console.log(isPasswordValid)
-            toast.error("Username or password is not correct!!!")
+            toast.error("Username or password is not correct!");
             return;
         }
 
         setLoading(true);
-        const res = await axios.post('https://localhost:7095/api/Auth/login', {
-            userName: email,
-            password: password
-        })
-        const response = res.data;
-        if (!response.status) {
-            toast.error(response.errors[0].message, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            })
+
+        try {
+            const res = await axios.post('https://localhost:7095/api/Auth/login', {
+                userName: email,
+                password: password
+            });
+
+            const response = res.data;
+
+            if (!response || !response.status || !response.data?.data?.token) {
+                toast.error("Login failed or token missing.");
+                setLoading(false);
+                return;
+            }
+
+                const userData = response.data.data;
+
+                if (!userData.roles?.includes("Admin")) {
+                toast.error("Only Admin users can log in.");
+                setLoading(false);
+                return;
+                }
+
+            localStorage.setItem("token", userData.token);
+            localStorage.setItem("user", JSON.stringify(userData));
+            localStorage.setItem("roles", JSON.stringify(userData.roles || []));
+
+            setIsAuthenticated(true);
+            setUser(userData);
+            navigate('/dashboard');
+        } catch (error: any) {
+            toast.error("Login failed");
+            console.error("Login error:", error);
+        } finally {
             setLoading(false);
-            return;
         }
-
-
-        const { token, firstName, lastName, birthdate } = response.data;
-
-
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify({ firstName, lastName, birthdate }));
-        setIsAuthenticated(true);
-        setUser(response.data);
-        setLoading(false);
-        navigate('/dashboard');
     }
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
     };
-
 
     return (
         <>
@@ -113,7 +116,6 @@ const Login = () => {
                         size={50}
                         aria-label="Loading Spinner"
                     />
-
                 </div>
             )}
 
@@ -122,41 +124,40 @@ const Login = () => {
                     <div className="form-content">
                         <form className="signup-form-content" onSubmit={handleSubmit}>
                             <h1 className="title">Login</h1>
-                            <DefaultInput onChange={handleChange} type="email" value={email} placeholder={"Enter Email"} error={hasError ? "Email is not valid" : undefined} />
-                            <div style={{
-                                position: 'relative',
-                                maxWidth: '75%'
-                            }}>
-
-                                <DefaultInput onChange={handlePasswordChange} style={{
-                                    maxWidth: '100%'
-                                }} type={isPasswordVisible ? "text" : "password"} value={password} placeholder={"Enter Password"} />
-                                <div
-                                    className="password-toggle-button"
-                                    onClick={togglePasswordVisibility}
-                                >
+                            <DefaultInput
+                                onChange={handleChange}
+                                type="email"
+                                value={email}
+                                placeholder={"Enter Email"}
+                                error={hasError ? "Email is not valid" : undefined}
+                            />
+                            <div style={{ position: 'relative', maxWidth: '75%' }}>
+                                <DefaultInput
+                                    onChange={handlePasswordChange}
+                                    style={{ maxWidth: '100%' }}
+                                    type={isPasswordVisible ? "text" : "password"}
+                                    value={password}
+                                    placeholder={"Enter Password"}
+                                />
+                                <div className="password-toggle-button" onClick={togglePasswordVisibility}>
                                     {isPasswordVisible ? <VisibilityOff /> : <Visibility />}
                                 </div>
                             </div>
                             <button type="submit" className='submit-btn'>Login</button>
-                            <p className="signup-text">Don't have an account? <a href="#" onClick={(e: any) => {
+                            <p className="signup-text">Don't have an account? <a href="#" onClick={(e) => {
                                 e.preventDefault();
-                                navigate('/signup')
+                                navigate('/signup');
                             }}>Sign Up now</a></p>
                         </form>
                     </div>
-
-                </div >
+                </div>
 
                 <div className="signup-right-container">
                     <img src={Logo} alt="Logo" className="logo-img" />
                 </div>
-            </div >
-
+            </div>
         </>
-
-
     );
 }
 
-export default Login
+export default Login;

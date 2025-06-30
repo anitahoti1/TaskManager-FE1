@@ -19,39 +19,38 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
         useEffect(() => {
-            const accessToken = localStorage.getItem('token');
-            const user = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    const userString = localStorage.getItem('user');
+    const roles = JSON.parse(localStorage.getItem("roles") || "[]");
 
-            if (accessToken) {
+    if (!token || !userString) {
+        setIsAuthenticated(false);
+        setIsLoading(false);
+        return;
+    }
 
-                axios.get('https://localhost:7095/api/Auth/GetAuth', {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`
-                    }
-                })
-                    .then(function () {
+    const localUser = { ...JSON.parse(userString), roles };
+    setUser(localUser);
+    setIsAuthenticated(true);
 
-                    setIsAuthenticated(true);
-                       user && setUser(JSON.parse(user))
-                       setIsLoading(false);
+    axios.get('https://localhost:7095/api/Auth/GetAuth', {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(() => {
+    })
+    .catch((error) => {
+        console.error("Unauthorized access:", error);
+        localStorage.clear();
+        setUser(undefined);
+        setIsAuthenticated(false);
+    })
+    .finally(() => {
+        setIsLoading(false);
+    });
+}, []);
 
-                    })
-                    .catch(function (error) {
-                            localStorage.clear();
-
-                            setIsAuthenticated(false);
-                            setUser(undefined);
-                        console.log(error);
-                    })
-                    .finally(function () {
-                                        setIsLoading(false);
-                    });
-            }else{
-                setIsLoading(false);
-                setIsAuthenticated(false);
-            }
-
-        }, [])
 
     return (
         <AuthContext.Provider value={{ user, setUser, isLoading,isAuthenticated,setIsAuthenticated,}}>
