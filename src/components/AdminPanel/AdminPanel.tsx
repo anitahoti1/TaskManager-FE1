@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import './AdminPage/AdminPage.css';
+import './../AdminPage/AdminPage.css';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);

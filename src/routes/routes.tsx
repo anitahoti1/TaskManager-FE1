@@ -7,7 +7,7 @@ import ProtectedRoute from "./../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "./../components/PublicRoute/PublicRoute";
 import LandingPage from "../components/LandingPage/LandingPage";
 import TasksDashboard from "../components/TasksDashboard/TasksDashboard";
-import AdminPanel from "../components/AdminPanel"; 
+import AdminPanel from "../components/AdminPanel/AdminPanel"; 
 import AdminRoute from "../components/ProtectedRoute/AdminRoute";
 import AdminPage from "../components/AdminPage/AdminPage"; 
 

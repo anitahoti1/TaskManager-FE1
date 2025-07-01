@@ -71,6 +71,7 @@ const Login = () => {
             });
 
             const response = res.data;
+            console.log("Login response:", response);
 
             if (!response || !response.status || !response.data?.token) {
                 toast.error("Login failed or token missing.");
@@ -90,8 +91,8 @@ const Login = () => {
 
 
         } catch (error: any) {
-            toast.error("Login failed");
-            console.error("Login error:", error);
+            toast.error(error?.response?.data?.message || "Login failed");
+            console.error("Login error:", error.response?.data || error);
         } finally {
             setLoading(false);
         }
@@ -147,13 +148,12 @@ const Login = () => {
                         </form>
                     </div>
                 </div>
-
                 <div className="signup-right-container">
                     <img src={Logo} alt="Logo" className="logo-img" />
                 </div>
             </div>
         </>
     );
-}
+};
 
 export default Login;
