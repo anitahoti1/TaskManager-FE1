@@ -72,19 +72,13 @@ const Login = () => {
 
             const response = res.data;
 
-            if (!response || !response.status || !response.data?.data?.token) {
+            if (!response || !response.status || !response.data?.token) {
                 toast.error("Login failed or token missing.");
                 setLoading(false);
                 return;
             }
 
-                const userData = response.data.data;
-
-                if (!userData.roles?.includes("Admin")) {
-                toast.error("Only Admin users can log in.");
-                setLoading(false);
-                return;
-                }
+            const userData = response.data;
 
             localStorage.setItem("token", userData.token);
             localStorage.setItem("user", JSON.stringify(userData));
@@ -93,6 +87,8 @@ const Login = () => {
             setIsAuthenticated(true);
             setUser(userData);
             navigate('/dashboard');
+
+
         } catch (error: any) {
             toast.error("Login failed");
             console.error("Login error:", error);
@@ -143,8 +139,8 @@ const Login = () => {
                                     {isPasswordVisible ? <VisibilityOff /> : <Visibility />}
                                 </div>
                             </div>
-                            <button type="submit" className='submit-btn'>Login</button>
-                            <p className="signup-text">Don't have an account? <a href="#" onClick={(e) => {
+                            <button type="submit" className='btn btn-primary w-75 mt-3'>Login</button>
+                            <p className="signup-text mt-3">Don't have an account? <a href="#" onClick={(e) => {
                                 e.preventDefault();
                                 navigate('/signup');
                             }}>Sign Up now</a></p>

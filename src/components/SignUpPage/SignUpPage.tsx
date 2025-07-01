@@ -243,12 +243,13 @@ const SignUpPage = () => {
             <span className="error-text">{formErrors.birthday}</span>
 
             <ToastContainer />
-            <button type="submit" className="submit-btn">Sign Up</button>
+            <button type="submit" className="btn btn-success w-75 mt-3">Sign Up</button>
 
-            <p>Already have an account? <a href="/login" onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-              e.preventDefault();
-              navigate('/login')
+            <p className="mt-3">Already have an account? <a href="/login" onClick={(e) => {
+               e.preventDefault();
+               navigate('/login')
             }}>Sign in</a></p>
+
           </form>
         </div>
 

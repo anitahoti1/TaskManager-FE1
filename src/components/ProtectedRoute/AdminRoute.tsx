@@ -1,15 +1,16 @@
-import { Navigate } from "react-router";
-import { useAuth } from "../../hooks/AuthProvider";
-import { JSX } from "react";
+import { JSX } from 'react';
+import { useAuth } from '../../hooks/AuthProvider';
+import { Navigate } from 'react-router';
 
 const AdminRoute = ({ children }: { children: JSX.Element }) => {
-  const { isAuthenticated } = useAuth();
-  const roles = JSON.parse(localStorage.getItem("roles") || "[]");
-  const isAdmin = roles.includes("Admin");
+  const { isAuthenticated, isLoading } = useAuth();
+  const roles = JSON.parse(localStorage.getItem('roles') || '[]');
 
-  if (!isAuthenticated || !isAdmin) {
-    return <Navigate to="/dashboard" />;
-  }
+  if (isLoading) return <div>Loading...</div>;
+
+  if (!isAuthenticated) return <Navigate to="/login" />;
+
+  if (!roles.includes('Admin')) return <Navigate to="/dashboard" />;
 
   return children;
 };

@@ -14,10 +14,10 @@ const LandingPage = () => {
             <p>Organize, track, and prioritize tasks to stay focused and productive</p>
           </div>
           <div className="buttons">
-            <button type="button" className="signup-btn" onClick={() => navigate('/signup')}>
+            <button type="button" className="btn btn-outline-light btn-lg" onClick={() => navigate('/signup')}>
               Sign Up
             </button>
-            <button type="button" className="login-btn" onClick={() => navigate('/login')}>
+            <button type="button" className="btn btn-light btn-lg" onClick={() => navigate('/login')}>
               Log In
             </button>
           </div>

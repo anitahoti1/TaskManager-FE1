@@ -74,7 +74,7 @@ const Dashboard: React.FC = () => {
               onClick={() => navigate('/admin')}
               style={{ marginLeft: "10px", backgroundColor: "darkred", color: "white" }}
             >
-              Admin Panel
+              Admin Dashboard
             </button>
           )}
 

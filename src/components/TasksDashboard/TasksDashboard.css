@@ -84,7 +84,6 @@ h2{
    .title{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
    }
 
 }

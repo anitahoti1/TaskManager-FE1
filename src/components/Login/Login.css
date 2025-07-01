@@ -9,8 +9,8 @@
 
 .password-toggle-button {
   position: absolute;
-  bottom: 15px;
-  right: -12px;
+  bottom: 19px;
+  right: 9px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -173,6 +173,9 @@ input[type="password"] {
 
 @media (max-width: 900px) {
 
+  .title{
+    left:15px;
+  }
   .signup-form {
     flex-direction: column-reverse;
     height: auto;
