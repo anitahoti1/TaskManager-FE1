@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import './../AdminPage/AdminPage.css';
+import './AdminPanel.css';
 
-const AdminDashboard = () => {
+const AdminPanel = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -41,4 +41,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default AdminPanel;
