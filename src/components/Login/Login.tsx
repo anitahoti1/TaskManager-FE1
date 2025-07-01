@@ -71,20 +71,21 @@ const Login = () => {
             });
 
             const response = res.data;
+            console.log("Login response:", response);
 
-            if (!response || !response.status || !response.data?.data?.token) {
+            if (!response || !response.status || !response.data || !response.data.token) {
                 toast.error("Login failed or token missing.");
                 setLoading(false);
                 return;
             }
 
-                const userData = response.data.data;
+            const userData = response.data;
 
-                if (!userData.roles?.includes("Admin")) {
+            if (!userData.roles?.includes("Admin")) {
                 toast.error("Only Admin users can log in.");
                 setLoading(false);
                 return;
-                }
+            }
 
             localStorage.setItem("token", userData.token);
             localStorage.setItem("user", JSON.stringify(userData));
@@ -94,8 +95,8 @@ const Login = () => {
             setUser(userData);
             navigate('/dashboard');
         } catch (error: any) {
-            toast.error("Login failed");
-            console.error("Login error:", error);
+            toast.error(error?.response?.data?.message || "Login failed");
+            console.error("Login error:", error.response?.data || error);
         } finally {
             setLoading(false);
         }
@@ -151,13 +152,12 @@ const Login = () => {
                         </form>
                     </div>
                 </div>
-
                 <div className="signup-right-container">
                     <img src={Logo} alt="Logo" className="logo-img" />
                 </div>
             </div>
         </>
     );
-}
+};
 
 export default Login;
