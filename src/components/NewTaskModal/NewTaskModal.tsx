@@ -3,7 +3,6 @@ import './NewTaskModal.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ITask } from '../../types/ITask/ITask';
-import './NewTaskModal.css';
 import { ETaskStatus } from './../../enums/ETaskStatus/ETaskStatus';
 
 interface Props {
@@ -73,66 +72,63 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
     }
   };
 
-  return ReactDOM.createPortal(
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <h3>Create New Task</h3>
-        <div className="modal" onClick={(e) => e.stopPropagation()}>
-  <h3>Create New Task</h3>
-  <p>Modal is working ✅</p>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Title *"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <textarea
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+return ReactDOM.createPortal(
+  <div className="new-task-modal-overlay" onClick={onClose}>
+    <div className="new-task-modal" onClick={(e) => e.stopPropagation()}>
+      <h3>Create New Task</h3>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Title *"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <textarea
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
 
-          <label>Assignee</label>
-          <select
-            name="assigneeId"
-            value={assigneeId}
-            onChange={(e) => setAssigneeId(e.target.value)}
-          >
-            <option value="">Select Assignee</option>
-            {users.map((user) => (
-              <option key={user.id} value={user.id}>
-                {user.fullName}
-              </option>
-            ))}
-          </select>
+        {/* <label>Assignee</label> */}
+        <select
+          name="assigneeId"
+          value={assigneeId}
+          onChange={(e) => setAssigneeId(e.target.value)}
+        >
+          <option value="">Select Assignee</option>
+          {users.map((user) => (
+            <option key={user.id} value={user.id}>
+              {user.fullName}
+            </option>
+          ))}
+        </select>
 
-          <label>Status</label>
-          <select
-            value={status}
-            onChange={(e) => setStatus(Number(e.target.value))}
-          >
-            <option value={ETaskStatus.ToDo}>To Do</option>
-            <option value={ETaskStatus.InProgress}>In Progress</option>
-            <option value={ETaskStatus.Review}>Review</option>
-            <option value={ETaskStatus.Done}>Done</option>
-          </select>
+        {/* <label>Status</label> */}
+        <select
+          value={status}
+          onChange={(e) => setStatus(Number(e.target.value))}
+        >
+          <option value={ETaskStatus.ToDo}>To Do</option>
+          <option value={ETaskStatus.InProgress}>In Progress</option>
+          <option value={ETaskStatus.Review}>Review</option>
+          <option value={ETaskStatus.Done}>Done</option>
+        </select>
 
-          {error && <p className="error">{error}</p>}
-          {success && <p className="success">{success}</p>}
+        {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
 
-          <div className="buttons">
-            <button type="submit">Create</button>
-            <button type="button" className="cancel" onClick={onClose}>
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
-      </div>
-    </div>,
-    document.body
-  );
+        <div className="new-task-buttons">
+          <button type="submit">Create</button>
+          <button type="button" className="cancel" onClick={onClose}>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>,
+  document.body
+);
+
 };
 
 export default NewTaskModal;
