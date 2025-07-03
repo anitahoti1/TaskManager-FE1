@@ -7,9 +7,8 @@ import ProtectedRoute from "./../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "./../components/PublicRoute/PublicRoute";
 import LandingPage from "../components/LandingPage/LandingPage";
 import TasksDashboard from "../components/TasksDashboard/TasksDashboard";
-import AdminPanel from "../components/AdminPanel/AdminPanel"; 
+import AdminDashboard from "../components/AdminDashboard/AdminDashboard";
 import AdminRoute from "../components/ProtectedRoute/AdminRoute";
-import AdminPage from "../components/AdminPage/AdminPage"; 
 
 
 const routes = createBrowserRouter([
@@ -19,7 +18,7 @@ const routes = createBrowserRouter([
     { path: "/signup", Component: SignUpPage },
     { path: "/dashboard", element: <ProtectedRoute><Dashboard/></ProtectedRoute>},
     { path: "/tasksdashboard", element: <ProtectedRoute><TasksDashboard/></ProtectedRoute>},
-    { path: "/admin", element: <AdminRoute><AdminPanel /></AdminRoute> }
+    { path: "/admin", element: <AdminRoute><AdminDashboard /></AdminRoute> }
 
 
   ]);

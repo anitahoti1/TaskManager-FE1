@@ -54,7 +54,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
         axios.get('https://localhost:7095/api/Auth/GetAuth', {
             headers: {
-                Authorization: `Bearer ${token}` // ✅ KJO ËSHTË NDRYSHIMI!
+                Authorization: `Bearer ${token}` 
             }
         })
             .then(() => {
