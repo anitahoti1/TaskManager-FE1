@@ -1,7 +1,9 @@
+import ReactDOM from 'react-dom';
 import './NewTaskModal.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ITask } from '../../types/ITask/ITask';
+import './NewTaskModal.css';
 import { ETaskStatus } from './../../enums/ETaskStatus/ETaskStatus';
 
 interface Props {
@@ -71,10 +73,13 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
     }
   };
 
-  return (
+  return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h3>Create New Task</h3>
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
+  <h3>Create New Task</h3>
+  <p>Modal is working ✅</p>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -124,7 +129,9 @@ const NewTaskModal = ({ onClose, onTaskCreated }: Props) => {
           </div>
         </form>
       </div>
-    </div>
+      </div>
+    </div>,
+    document.body
   );
 };
 

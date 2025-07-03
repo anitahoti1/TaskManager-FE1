@@ -68,6 +68,7 @@ const TasksDashboard = () => {
           <button
             className="task-btn"
             onClick={() => {
+               console.log('Button Clicked');
               setIsNewTaskModalOpen(true);
             }}
           >
@@ -123,14 +124,18 @@ const TasksDashboard = () => {
       )}
 
       {isNewTaskModalOpen && (
-        <NewTaskModal
-          onClose={() => setIsNewTaskModalOpen(false)}
-          onTaskCreated={async (newTask) => {
-            await getData();
-            setIsNewTaskModalOpen(false);
-          }}
-        />
-      )}
+  <>
+    {console.log('Modal is open')}
+    <NewTaskModal
+      onClose={() => setIsNewTaskModalOpen(false)}
+      onTaskCreated={async (newTask) => {
+        await getData();
+        setIsNewTaskModalOpen(false);
+      }}
+    />
+  </>
+)}
+
     </div>
   );
 };

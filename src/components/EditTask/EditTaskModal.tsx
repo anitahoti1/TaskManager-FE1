@@ -90,20 +90,18 @@ const EditTaskModal = ({ task, onSave, onCancel }: IEditTaskModal) => {
           <label>Title</label>
           <input name="title" value={formData.title} onChange={handleChange} />
 
-          <label>Description</label>
+
           <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
           />
 
-          <label>Assignee</label>
           <select
             name="assigneeId"
             value={formData.assigneeId}
             onChange={handleChange}
           >
-            <option value="">Select Assignee</option>
             {users.map((user) => (
               <option key={user.id} value={user.id}>
                 {user.fullName}
@@ -111,7 +109,6 @@ const EditTaskModal = ({ task, onSave, onCancel }: IEditTaskModal) => {
             ))}
           </select>
 
-          <label>Status</label>
           <select
             name="status"
             value={formData.status}

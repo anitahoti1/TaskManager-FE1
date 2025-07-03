@@ -71,7 +71,6 @@ const Login = () => {
             });
 
             const response = res.data;
-            console.log("Login response:", response);
 
             if (!response || !response.status || !response.data?.token) {
                 toast.error("Login failed or token missing.");

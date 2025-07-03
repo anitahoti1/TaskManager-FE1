@@ -98,3 +98,11 @@ width: 100%;
     cursor: pointer;
     max-width: 80%;
 */
+
+.full-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow: visible; /* Shto këtë për siguri */
+}
